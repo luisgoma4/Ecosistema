@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El ecosistema</title>
+<meta name="description" content="Mapa causal del ecosistema: caras, figuras legales, productos, socios por rol, esferas del mundo y financiadores. Generado 28 Oct 2026.">
+<style>
+:root {
+  color-scheme: light;
+  --page: #f9f9f7;
+  --surface: #fcfcfb;
+  --surface-2: #f3f2ee;
+  --ink: #0b0b0b;
+  --ink-2: #52514e;
+  --muted: #898781;
+  --grid: #e1e0d9;
+  --axis: #c3c2b7;
+  --border: rgba(11,11,11,0.10);
+  --accent: #2a78d6;
+  --line-cloudy: #2a78d6;
+  --line-semf: #eb6834;
+  --line-causality: #1baf7a;
+  --line-branchout: #eda100;
+  --line-delfina: #e87ba4;
+  --line-cosmo: #a23fb3;
+  --line-dako: #c4314b;
+  --world-sphere: #4a3aa7;
+  --world-funder: #008300;
+  --good: #0ca30c;
+  --good-ink: #006300;
+  --warning: #fab219;
+  --critical: #d03b3b;
+  --shadow: 0 1px 2px rgba(11,11,11,0.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface: #1a1a19; --surface-2: #242422;
+    --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
+    --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,0.10);
+    --accent: #3987e5;
+    --line-cloudy: #3987e5; --line-semf: #d95926; --line-causality: #199e70; --line-branchout: #c98500; --line-delfina: #d55181; --line-cosmo: #c062d1; --line-dako: #e2566d; --world-sphere: #9085e9; --world-funder: #0ca30c;
+    --good-ink: #0ca30c; --shadow: none;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0d0d0d; --surface: #1a1a19; --surface-2: #242422;
+  --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
+  --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,0.10);
+  --accent: #3987e5;
+  --line-cloudy: #3987e5; --line-semf: #d95926; --line-causality: #199e70; --line-branchout: #c98500; --line-delfina: #d55181; --line-cosmo: #c062d1; --line-dako: #e2566d;
+  --world-sphere: #9085e9; --world-funder: #0ca30c;
+  --good-ink: #0ca30c; --shadow: none;
+}
+
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--page); color: var(--ink); font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; overflow-x: hidden; }
+a { color: var(--accent); }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 24px 16px 40px; }
+h1 { font-size: 26px; line-height: 1.2; margin: 0 0 4px; letter-spacing: -0.01em; }
+.sub { color: var(--ink-2); margin: 0; max-width: 70ch; }
+footer { margin-top: 14px; font-size: 12px; color: var(--muted); }
+.err { padding: 40px 16px; text-align: center; color: var(--ink-2); }
+/* Red: Obsidian-style live graph (grafo_red.js on vendor/force-graph) */
+.net { position: relative; margin-top: 10px; border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+  background: radial-gradient(circle at 50% 45%, var(--surface) 0%, var(--page) 100%); }
+.net.full { border: 0; border-radius: 0; background: var(--page); }
+.net-stage { width: 100%; cursor: grab; }
+.net-stage:active { cursor: grabbing; }
+.net-3d { cursor: grab; }
+.net-labels { position: absolute; left: 0; top: 0; pointer-events: none; }
+.net-note { position: absolute; left: 50%; top: 14px; transform: translateX(-50%); font-size: 13px; color: var(--ink-2); pointer-events: none; }
+.net-dim { width: auto; padding: 0 9px; font-size: 13px; font-weight: 650; }
+.net-tools { position: absolute; top: 10px; right: 10px; display: flex; gap: 6px; align-items: center; }
+.net-search { width: 180px; font: inherit; font-size: 13px; padding: 5px 9px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); color: var(--ink); }
+.net-btn { width: 32px; height: 30px; font-size: 16px; line-height: 1; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); color: var(--ink); cursor: pointer; }
+.net-btn:hover, .net-chip:hover { border-color: var(--accent); }
+.net-btn:focus-visible, .net-chip:focus-visible, .net-search:focus-visible, .net-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.net-legend { position: absolute; left: 10px; bottom: 10px; right: 10px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; pointer-events: none; }
+.net-legend > * { pointer-events: auto; }
+.net-chip, .net-key { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; padding: 2px 8px; border-radius: 999px;
+  border: 1px solid var(--border); background: color-mix(in srgb, var(--surface) 88%, transparent); color: var(--ink-2); }
+.net-chip { cursor: pointer; font: inherit; font-size: 12px; }
+.net-chip[aria-pressed="false"] { opacity: .45; text-decoration: line-through; }
+.net-key { border-style: dashed; }
+.net-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; flex: none; }
+.net-dot.dia { border-radius: 1px; transform: rotate(45deg) scale(.85); }
+.net-dot.sq { border-radius: 1px; }
+.net-dot.hol { border: 1.5px dashed var(--muted); background: transparent; }
+.net-card { position: absolute; top: 50px; right: 10px; width: min(320px, calc(100% - 20px)); max-height: calc(100% - 100px); overflow: auto;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; box-shadow: 0 6px 24px rgba(0,0,0,.12); font-size: 13px; }
+.net-card h3 { margin: 4px 0 6px; font-size: 16px; padding-right: 20px; }
+.net-card h4 { margin: 10px 0 4px; font-size: 12px; color: var(--ink-2); text-transform: uppercase; letter-spacing: .04em; }
+.net-card p { margin: 0 0 6px; color: var(--ink-2); }
+.net-card ul { margin: 0; padding-left: 16px; }
+.net-card li { margin: 2px 0; }
+.net-kind { font-size: 12px; color: var(--ink-2); display: flex; gap: 6px; align-items: center; }
+.net-link { background: none; border: 0; padding: 0; font: inherit; color: var(--accent); cursor: pointer; text-align: left; text-decoration: underline; }
+.net-w { color: var(--muted); font-size: 12px; }
+.net-x { position: absolute; top: 6px; right: 8px; background: none; border: 0; font-size: 18px; color: var(--ink-2); cursor: pointer; }
+.net-open { margin: 4px 0 2px; font: inherit; font-size: 13px; padding: 4px 10px; border-radius: 8px; border: 1px solid var(--accent); background: none; color: var(--accent); cursor: pointer; }
+@media (max-width: 600px) { .net-search { width: 120px; } .net-card { top: auto; bottom: 46px; max-height: 55%; } }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header>
+    <h1>El ecosistema</h1>
+    <p class="sub">Mapa causal del ecosistema: caras, figuras legales, productos, socios (por su rol), las seis esferas del mundo que lo envuelven y los financiadores. Las flechas van de causa a efecto; el grosor indica la fuerza de la relación.</p>
+  </header>
+  <div id="mapa" aria-label="Mapa interactivo del ecosistema"></div>
+  <footer>Arrastra para mover, rueda o pellizco para acercar, clic en un nodo para ver sus causas y efectos. Actualizado 28 Oct 2026.</footer>
+</main>
+<script src="vendor/force-graph.min.js"></script>
+<script src="grafo_red.js"></script>
+<script>
+  // The public map: data from mapa.json (planner.public_map, checked by planner.public_leaks); edges by thickness only.
+  fetch("mapa.json").then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); }).then((m) => {
+    const net = GrafoRed.mount(document.getElementById("mapa"), { faces: m.faces, weights: false, dimButton: "always" });
+    net.setData({ nodes: m.nodes, edges: m.edges, figure: m.figure });
+  }).catch(() => {
+    document.getElementById("mapa").innerHTML = '<p class="err">No se pudo cargar el mapa.</p>';
+  });
+</script>
+</body>
+</html>

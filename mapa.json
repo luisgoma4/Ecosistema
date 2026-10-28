@@ -1,0 +1,2044 @@
+{
+ "generated": "2026-10-28",
+ "faces": {
+  "cloudy": {
+   "name": "Cloudy"
+  },
+  "semf": {
+   "name": "SEMF"
+  },
+  "causality": {
+   "name": "Causality Graphs"
+  },
+  "branchout": {
+   "name": "BranchOut"
+  },
+  "delfina": {
+   "name": "Fundación paraguas (sin nombre)"
+  },
+  "cosmo": {
+   "name": "CosmoVentures"
+  },
+  "dako": {
+   "name": "El Gran DaKo"
+  }
+ },
+ "nodes": [
+  {
+   "id": "e_fund",
+   "label": "Fundación (sin nombre)",
+   "kind": "entity",
+   "status": "planned",
+   "face": "delfina",
+   "detail": "Paraguas sin ánimo de lucro; por constituir y sin nombre.",
+   "pending": false
+  },
+  {
+   "id": "e_asoc",
+   "label": "Asociación local (Las Rozas)",
+   "kind": "entity",
+   "status": "proposed",
+   "face": "delfina",
+   "detail": "Para espacios y ayudas culturales municipales.",
+   "pending": false
+  },
+  {
+   "id": "e_semf",
+   "label": "SEMF (asociación)",
+   "kind": "entity",
+   "status": "exists",
+   "face": "semf",
+   "detail": "Asociación multinacional inscrita en Valencia; fin principal científico.",
+   "pending": false
+  },
+  {
+   "id": "e_cg",
+   "label": "Causality Graphs (empresa)",
+   "kind": "entity",
+   "status": "exists",
+   "face": "causality",
+   "detail": "Empresa confirmada.",
+   "pending": false
+  },
+  {
+   "id": "e_bo",
+   "label": "BranchOut SL",
+   "kind": "entity",
+   "status": "exists",
+   "face": "branchout",
+   "detail": "Sociedad limitada.",
+   "pending": false
+  },
+  {
+   "id": "f_cloudy",
+   "label": "Cloudy",
+   "kind": "face",
+   "status": "exists",
+   "face": "cloudy",
+   "detail": "Proyecto sin ánimo de lucro de divulgación científica para familias; sin figura legal propia.",
+   "pending": false
+  },
+  {
+   "id": "f_semf",
+   "label": "SEMF",
+   "kind": "face",
+   "status": "exists",
+   "face": "semf",
+   "detail": "Red interdisciplinar internacional. Ciclo anual de octubre a septiembre: escuela en Valencia, talleres en Madrid y actividades online.",
+   "pending": false
+  },
+  {
+   "id": "f_cg",
+   "label": "Causality Graphs",
+   "kind": "face",
+   "status": "exists",
+   "face": "causality",
+   "detail": "Inferencia causal y datos de salud.",
+   "pending": false
+  },
+  {
+   "id": "f_bo",
+   "label": "BranchOut",
+   "kind": "face",
+   "status": "exists",
+   "face": "branchout",
+   "detail": "Hub de startups tecnológicas.",
+   "pending": false
+  },
+  {
+   "id": "p_books",
+   "label": "Libros, cartas y serie 3D",
+   "kind": "product",
+   "status": "exists",
+   "face": "cloudy",
+   "detail": "Contenido bilingüe de ciencia y salud (cloudybooks.org).",
+   "pending": false
+  },
+  {
+   "id": "p_sessions",
+   "label": "Sesiones familiares en colegios",
+   "kind": "product",
+   "status": "planned",
+   "face": "cloudy",
+   "detail": "Vía Decreto 11/2018 (uso de colegios fuera de horario).",
+   "pending": false
+  },
+  {
+   "id": "p_events",
+   "label": "Escuela Interdisciplinar y congresos",
+   "kind": "product",
+   "status": "exists",
+   "face": "semf",
+   "detail": "Escuela Interdisciplinar anual en Valencia (julio; una semana, ~15 ponentes, ~120 participantes), con talleres de creación colectiva; congresos internacionales.",
+   "pending": false
+  },
+  {
+   "id": "p_ciclo",
+   "label": "Ciclo SEMF Madrid Oeste",
+   "kind": "product",
+   "status": "planned",
+   "face": "semf",
+   "detail": "Talleres y conferencias en centros culturales de Las Rozas.",
+   "pending": false
+  },
+  {
+   "id": "p_consult",
+   "label": "Consultoría de inferencia causal",
+   "kind": "product",
+   "status": "exists",
+   "face": "causality",
+   "detail": "DAGs, modelos causales dinámicos; clientes farma y clínicos.",
+   "pending": false
+  },
+  {
+   "id": "p_lib",
+   "label": "Librería abierta de DAGs",
+   "kind": "product",
+   "status": "planned",
+   "face": "causality",
+   "detail": "Herramienta de código abierto en preparación.",
+   "pending": false
+  },
+  {
+   "id": "p_eval",
+   "label": "Evaluación de impacto del ecosistema",
+   "kind": "product",
+   "status": "planned",
+   "face": "causality",
+   "detail": "Mide el impacto de Cloudy, SEMF y BranchOut.",
+   "pending": false
+  },
+  {
+   "id": "p_hub",
+   "label": "Hub de startups",
+   "kind": "product",
+   "status": "exists",
+   "face": "branchout",
+   "detail": "Comunidad de startups tecnológicas de BranchOut.",
+   "pending": false
+  },
+  {
+   "id": "p_cowork",
+   "label": "Coworking",
+   "kind": "product",
+   "status": "planned",
+   "face": "branchout",
+   "detail": "Espacio de trabajo en Madrid Oeste.",
+   "pending": false
+  },
+  {
+   "id": "p_coliving",
+   "label": "Coliving",
+   "kind": "product",
+   "status": "planned",
+   "face": "branchout",
+   "detail": "Vivienda compartida para emprendedores e investigadores.",
+   "pending": false
+  },
+  {
+   "id": "p_space",
+   "label": "Espacio compartido Madrid Oeste",
+   "kind": "product",
+   "status": "planned",
+   "face": "delfina",
+   "detail": "Sede física común de todas las caras.",
+   "pending": false
+  },
+  {
+   "id": "x_csic",
+   "label": "PI del CSIC (neurociencia computacional)",
+   "kind": "partner",
+   "status": "external",
+   "face": "causality",
+   "detail": "Investigador externo de Causality Graphs.",
+   "pending": false
+  },
+  {
+   "id": "x_uned",
+   "label": "Coordinador grado en Física (UNED)",
+   "kind": "partner",
+   "status": "external",
+   "face": "semf",
+   "detail": "Aval académico, estudiantes, divulgación.",
+   "pending": true
+  },
+  {
+   "id": "x_idiphisa",
+   "label": "IDIPHISA · Puerta de Hierro",
+   "kind": "partner",
+   "status": "external",
+   "face": "causality",
+   "detail": "Instituto de investigación sanitaria (Majadahonda).",
+   "pending": true
+  },
+  {
+   "id": "x_lr",
+   "label": "Ayto. Las Rozas · Las Rozas Innova",
+   "kind": "partner",
+   "status": "external",
+   "face": "delfina",
+   "detail": "Convenios, espacios y ecosistema tech.",
+   "pending": true
+  },
+  {
+   "id": "s_politica",
+   "label": "Política",
+   "kind": "sphere",
+   "status": "external",
+   "face": null,
+   "detail": "Administraciones públicas: UE, ministerios, Comunidad de Madrid y ayuntamientos. Convocan la mayoría de las ayudas, ceden espacios y firman convenios.",
+   "pending": false
+  },
+  {
+   "id": "s_bancos",
+   "label": "Bancos",
+   "kind": "sphere",
+   "status": "external",
+   "face": null,
+   "detail": "Banca, obra social bancaria, crédito público e inversores: préstamos, mecenazgo y capital.",
+   "pending": false
+  },
+  {
+   "id": "s_arte",
+   "label": "Arte",
+   "kind": "sphere",
+   "status": "external",
+   "face": null,
+   "detail": "Mundo cultural y artístico: fundaciones culturales, políticas culturales, edición y la confluencia arte-ciencia.",
+   "pending": false
+  },
+  {
+   "id": "e_cosmo",
+   "label": "CosmoVentures SASU",
+   "kind": "entity",
+   "status": "exists",
+   "face": "cosmo",
+   "detail": "Sociedad unipersonal francesa con sede en París.",
+   "pending": false
+  },
+  {
+   "id": "f_cosmo",
+   "label": "CosmoVentures",
+   "kind": "face",
+   "status": "exists",
+   "face": "cosmo",
+   "detail": "Estudio científico: consultoría, evaluación de IA, juegos educativos y formatos culturales (cosmoventures.fr).",
+   "pending": false
+  },
+  {
+   "id": "p_cv_consult",
+   "label": "Consultoría científica y evaluación de IA",
+   "kind": "product",
+   "status": "exists",
+   "face": "cosmo",
+   "detail": "Revisión científica de productos, estrategia de I+D, asesoría a medios y evaluación de razonamiento y seguridad de IA (benchmarks).",
+   "pending": false
+  },
+  {
+   "id": "p_cv_games",
+   "label": "Juegos educativos de navegador",
+   "kind": "product",
+   "status": "exists",
+   "face": "cosmo",
+   "detail": "Juegos gratuitos de lógica y física (paridad, ondas, termodinámica, mareas) y un laboratorio de seguridad de IA; aptos para aula y talleres.",
+   "pending": false
+  },
+  {
+   "id": "p_cv_talleres",
+   "label": "Talleres y formatos arte-astronomía",
+   "kind": "product",
+   "status": "exists",
+   "face": "cosmo",
+   "detail": "Talleres, guías interactivas de radioastronomía, juegos de mesa y formatos culturales que unen astronomía, arte y cocina.",
+   "pending": false
+  },
+  {
+   "id": "p_cv_music",
+   "label": "Música en directo para eventos",
+   "kind": "product",
+   "status": "exists",
+   "face": "cosmo",
+   "detail": "Línea de música en directo para eventos.",
+   "pending": false
+  },
+  {
+   "id": "s_ciencia",
+   "label": "Ciencia",
+   "kind": "sphere",
+   "status": "external",
+   "face": null,
+   "detail": "Mundo científico: universidades, centros de investigación, sociedades científicas y agencias de I+D. Da método, reputación y redes.",
+   "pending": false
+  },
+  {
+   "id": "s_tecnologia",
+   "label": "Tecnología",
+   "kind": "sphere",
+   "status": "external",
+   "face": null,
+   "detail": "Mundo tecnológico: startups, industria digital, IA y software abierto. Da herramientas, mercado y capital de riesgo.",
+   "pending": false
+  },
+  {
+   "id": "s_sociedad",
+   "label": "Sociedad",
+   "kind": "sphere",
+   "status": "external",
+   "face": null,
+   "detail": "La ciudadanía: familias, asociaciones, voluntariado y opinión pública. Es la demanda de fondo: lo que la política y la cultura acaban atendiendo.",
+   "pending": false
+  },
+  {
+   "id": "e_dako",
+   "label": "El Gran DaKo",
+   "kind": "entity",
+   "status": "exists",
+   "face": "dako",
+   "detail": "Productora de artes escénicas (autónomo) con domicilio fiscal en Madrid capital.",
+   "pending": false
+  },
+  {
+   "id": "f_dako",
+   "label": "El Gran DaKo",
+   "kind": "face",
+   "status": "exists",
+   "face": "dako",
+   "detail": "Artes escénicas: poesía y música en directo.",
+   "pending": false
+  },
+  {
+   "id": "p_dako_show",
+   "label": "Espectáculo «Lo que no morirá»",
+   "kind": "product",
+   "status": "planned",
+   "face": "dako",
+   "detail": "Espectáculo escénico de poesía y música en directo en tres actos; estreno en sala de Madrid y después gira.",
+   "pending": false
+  },
+  {
+   "id": "x_ptrail",
+   "label": "Phoenician Trail Neutral Optic Cable SL",
+   "kind": "partner",
+   "status": "external",
+   "face": "branchout",
+   "detail": "Sociedad titular del cable submarino; BranchOut actúa como gestor externo.",
+   "pending": true
+  },
+  {
+   "id": "p_bo_indago",
+   "label": "Indago Research",
+   "kind": "product",
+   "status": "exists",
+   "face": "branchout",
+   "detail": "Consultoría de investigación e inteligencia sectorial con IA (informes de industria y ciencia).",
+   "pending": false
+  },
+  {
+   "id": "p_bo_acm",
+   "label": "ACM Engine",
+   "kind": "product",
+   "status": "planned",
+   "face": "branchout",
+   "detail": "Gemelo digital y captura de conocimiento experto para fabricantes de maquinaria (formación, prevención y posventa).",
+   "pending": false
+  },
+  {
+   "id": "p_bo_codevs",
+   "label": "CoDevs",
+   "kind": "product",
+   "status": "planned",
+   "face": "branchout",
+   "detail": "Rescate de edificios en desuso como hubs de codesarrollo y coworking gestionados con IA.",
+   "pending": false
+  },
+  {
+   "id": "p_bo_os",
+   "label": "Branchout OS",
+   "kind": "product",
+   "status": "planned",
+   "face": "branchout",
+   "detail": "Sistema abierto de colaboración: orquestación de agentes IA y atribución de autoría sobre git.",
+   "pending": false
+  },
+  {
+   "id": "p_bo_qtc",
+   "label": "Ciberseguridad poscuántica",
+   "kind": "product",
+   "status": "proposed",
+   "face": "branchout",
+   "detail": "Transición poscuántica y cumplimiento NIS2 para empresas y sector público, con un socio de ciberseguridad.",
+   "pending": false
+  },
+  {
+   "id": "p_bo_modenode",
+   "label": "ModeNode",
+   "kind": "product",
+   "status": "proposed",
+   "face": "branchout",
+   "detail": "Electrónica modular y abierta: nodos IoT de ciudad y sensórica agroganadera.",
+   "pending": false
+  },
+  {
+   "id": "p_bo_buildverso",
+   "label": "Buildverso",
+   "kind": "product",
+   "status": "proposed",
+   "face": "branchout",
+   "detail": "Software para construcción industrializada: traduce proyectos clásicos a sistemas industrializados.",
+   "pending": false
+  },
+  {
+   "id": "p_bo_ptrail",
+   "label": "Phoenician Trail",
+   "kind": "product",
+   "status": "planned",
+   "face": "branchout",
+   "detail": "Cable submarino mediterráneo neutral (16 países); BranchOut como gestor externo del relanzamiento.",
+   "pending": false
+  },
+  {
+   "id": "p_bo_ignicion",
+   "label": "IGNICIÓN-MADRID",
+   "kind": "product",
+   "status": "proposed",
+   "face": "branchout",
+   "detail": "Propuesta de Compra Pública Innovadora: estación de láseres para fusión por confinamiento inercial con universidades madrileñas.",
+   "pending": false
+  },
+  {
+   "id": "x_rac",
+   "label": "Real Academia de Ciencias (RAC)",
+   "kind": "partner",
+   "status": "external",
+   "face": "semf",
+   "detail": "Sede y difusión de los talleres SEMF en Madrid (2027).",
+   "pending": true
+  },
+  {
+   "id": "x_upv",
+   "label": "Universitat Politècnica de València",
+   "kind": "partner",
+   "status": "external",
+   "face": "semf",
+   "detail": "Aulas, alojamiento de estudiantes e instalaciones para la Escuela Interdisciplinar; difusión cruzada.",
+   "pending": true
+  },
+  {
+   "id": "p_semf_rac",
+   "label": "Talleres SEMF en la Real Academia de Ciencias",
+   "kind": "product",
+   "status": "planned",
+   "face": "semf",
+   "detail": "Serie de 3–4 jornadas en Madrid (enero–junio 2027) sobre conocimiento e interdisciplinariedad, ~3 ponentes y 50–100 asistentes; una sesión en la Universidad Complutense.",
+   "pending": false
+  },
+  {
+   "id": "p_semf_online",
+   "label": "SEMFiloquia y Concept Colliders",
+   "kind": "product",
+   "status": "exists",
+   "face": "semf",
+   "detail": "Actividades online recurrentes: entrevistas con expertos y debates interdisciplinares abiertos a la comunidad.",
+   "pending": false
+  },
+  {
+   "id": "p_semf_video",
+   "label": "Archivo de vídeo y divulgación en redes",
+   "kind": "product",
+   "status": "planned",
+   "face": "semf",
+   "detail": "Publicar el archivo de grabaciones de eventos en YouTube, clips y piezas cortas, y un plan de redes con contenido de fondo.",
+   "pending": false
+  },
+  {
+   "id": "p_semf_book",
+   "label": "Libro y revista SEMF",
+   "kind": "product",
+   "status": "proposed",
+   "face": "semf",
+   "detail": "Propuesta: libro de entrevistas y reflexiones sobre interdisciplinariedad y una revista editorial con ensayos de la comunidad.",
+   "pending": false
+  },
+  {
+   "id": "p_semf_retreat",
+   "label": "Retiro interdisciplinar",
+   "kind": "product",
+   "status": "proposed",
+   "face": "semf",
+   "detail": "Propuesta: ~20 personas en trabajo colaborativo intensivo (posible sede: isla de Tabarca).",
+   "pending": false
+  },
+  {
+   "id": "x_weber",
+   "label": "Fundación Weber",
+   "kind": "partner",
+   "status": "external",
+   "face": "causality",
+   "detail": "Fundación de economía de la salud muy ligada a la industria farmacéutica (weber.org.es); socio de Causality Graphs en formación para clínicos.",
+   "pending": true
+  },
+  {
+   "id": "p_cg_formacion",
+   "label": "Formación en causalidad para clínicos",
+   "kind": "product",
+   "status": "planned",
+   "face": "causality",
+   "detail": "Programa de formación en inferencia causal para profesionales clínicos, con la Fundación Weber.",
+   "pending": false
+  },
+  {
+   "id": "e_ddd",
+   "label": "Asociación D+D+D",
+   "kind": "entity",
+   "status": "exists",
+   "face": "delfina",
+   "detail": "Asociación de arte para la diversidad, diversión y desarrollo, con sede en Villanueva de la Cañada (Madrid).",
+   "pending": false
+  },
+  {
+   "id": "u_ce",
+   "label": "Comisión Europea",
+   "kind": "funder",
+   "status": "external",
+   "face": null,
+   "detail": "Financiador · esfera: Política, Ciencia, Tecnología",
+   "pending": false
+  },
+  {
+   "id": "u_cost",
+   "label": "COST Association",
+   "kind": "funder",
+   "status": "external",
+   "face": null,
+   "detail": "Financiador · esfera: Política, Ciencia",
+   "pending": false
+  },
+  {
+   "id": "u_nlnet",
+   "label": "NLnet (fondos UE)",
+   "kind": "funder",
+   "status": "external",
+   "face": null,
+   "detail": "Financiador · esfera: Política, Tecnología",
+   "pending": false
+  },
+  {
+   "id": "u_fecyt",
+   "label": "FECYT",
+   "kind": "funder",
+   "status": "external",
+   "face": null,
+   "detail": "Financiador · esfera: Política, Ciencia, Sociedad",
+   "pending": false
+  },
+  {
+   "id": "u_cdti",
+   "label": "CDTI",
+   "kind": "funder",
+   "status": "external",
+   "face": null,
+   "detail": "Financiador · esfera: Política, Bancos, Tecnología",
+   "pending": false
+  },
+  {
+   "id": "u_enisa",
+   "label": "ENISA",
+   "kind": "funder",
+   "status": "external",
+   "face": null,
+   "detail": "Financiador · esfera: Bancos, Política, Tecnología",
+   "pending": false
+  },
+  {
+   "id": "u_vivienda",
+   "label": "Ministerio de Vivienda",
+   "kind": "funder",
+   "status": "external",
+   "face": null,
+   "detail": "Financiador · esfera: Política, Sociedad",
+   "pending": false
+  },
+  {
+   "id": "u_cam",
+   "label": "Comunidad de Madrid",
+   "kind": "funder",
+   "status": "external",
+   "face": null,
+   "detail": "Financiador · esfera: Política",
+   "pending": false
+  },
+  {
+   "id": "u_madrimasd",
+   "label": "Fundación madri+d",
+   "kind": "funder",
+   "status": "external",
+   "face": null,
+   "detail": "Financiador · esfera: Política, Ciencia, Tecnología",
+   "pending": false
+  },
+  {
+   "id": "u_pozuelo",
+   "label": "Ayto. Pozuelo de Alarcón",
+   "kind": "funder",
+   "status": "external",
+   "face": null,
+   "detail": "Financiador · esfera: Política, Arte",
+   "pending": false
+  },
+  {
+   "id": "u_majadahonda",
+   "label": "Ayto. Majadahonda",
+   "kind": "funder",
+   "status": "external",
+   "face": null,
+   "detail": "Financiador · esfera: Política",
+   "pending": false
+  },
+  {
+   "id": "u_lacaixa",
+   "label": "Fundación «la Caixa»",
+   "kind": "funder",
+   "status": "external",
+   "face": null,
+   "detail": "Financiador · esfera: Bancos, Arte, Ciencia, Sociedad",
+   "pending": false
+  },
+  {
+   "id": "u_carasso",
+   "label": "Fundación Carasso",
+   "kind": "funder",
+   "status": "external",
+   "face": null,
+   "detail": "Financiador · esfera: Arte, Sociedad",
+   "pending": false
+  },
+  {
+   "id": "u_inversores",
+   "label": "Inversores (business angels)",
+   "kind": "funder",
+   "status": "external",
+   "face": null,
+   "detail": "Financiador · esfera: Bancos, Tecnología",
+   "pending": false
+  },
+  {
+   "id": "u_sabadell",
+   "label": "Banco Sabadell (BStartup)",
+   "kind": "funder",
+   "status": "external",
+   "face": null,
+   "detail": "Financiador · esfera: Bancos, Tecnología",
+   "pending": false
+  },
+  {
+   "id": "u_bolsasocial",
+   "label": "La Bolsa Social (crowdfunding de impacto)",
+   "kind": "funder",
+   "status": "external",
+   "face": null,
+   "detail": "Financiador · esfera: Bancos, Sociedad",
+   "pending": false
+  },
+  {
+   "id": "u_ship2b",
+   "label": "Fundación Ship2B (fondos de impacto)",
+   "kind": "funder",
+   "status": "external",
+   "face": null,
+   "detail": "Financiador · esfera: Bancos, Sociedad",
+   "pending": false
+  },
+  {
+   "id": "u_bpifrance",
+   "label": "Bpifrance",
+   "kind": "funder",
+   "status": "external",
+   "face": null,
+   "detail": "Financiador · esfera: Política, Bancos, Tecnología",
+   "pending": false
+  },
+  {
+   "id": "u_reseau",
+   "label": "Réseau Entreprendre Paris",
+   "kind": "funder",
+   "status": "external",
+   "face": null,
+   "detail": "Financiador · esfera: Bancos, Tecnología",
+   "pending": false
+  },
+  {
+   "id": "u_eafunds",
+   "label": "EA Funds (filantropía de IA)",
+   "kind": "funder",
+   "status": "external",
+   "face": null,
+   "detail": "Financiador · esfera: Bancos, Tecnología, Sociedad",
+   "pending": false
+  },
+  {
+   "id": "u_cnc",
+   "label": "CNC (Centre national du cinéma)",
+   "kind": "funder",
+   "status": "external",
+   "face": null,
+   "detail": "Financiador · esfera: Política, Arte, Tecnología",
+   "pending": false
+  },
+  {
+   "id": "u_madrid_ayto",
+   "label": "Ayuntamiento de Madrid",
+   "kind": "funder",
+   "status": "external",
+   "face": null,
+   "detail": "Financiador · esfera: Política, Arte",
+   "pending": false
+  },
+  {
+   "id": "u_gva",
+   "label": "Generalitat Valenciana",
+   "kind": "funder",
+   "status": "external",
+   "face": null,
+   "detail": "Financiador · esfera: Política, Ciencia",
+   "pending": false
+  },
+  {
+   "id": "u_valencia_ayto",
+   "label": "Ajuntament de València",
+   "kind": "funder",
+   "status": "external",
+   "face": null,
+   "detail": "Financiador · esfera: Política, Arte",
+   "pending": false
+  }
+ ],
+ "edges": [
+  {
+   "from": "e_fund",
+   "to": "f_cloudy",
+   "label": "vehículo legal",
+   "weight": 0.6,
+   "status": "planned"
+  },
+  {
+   "from": "e_fund",
+   "to": "f_semf",
+   "label": "acoge en Madrid",
+   "weight": 0.6,
+   "status": "planned"
+  },
+  {
+   "from": "f_cg",
+   "to": "e_fund",
+   "label": "aporta a la fundación",
+   "weight": 0.3,
+   "status": "planned"
+  },
+  {
+   "from": "f_bo",
+   "to": "e_fund",
+   "label": "aporta a la fundación",
+   "weight": 0.3,
+   "status": "planned"
+  },
+  {
+   "from": "e_asoc",
+   "to": "f_cloudy",
+   "label": "actividades locales",
+   "weight": 0.6,
+   "status": "planned"
+  },
+  {
+   "from": "e_asoc",
+   "to": "f_semf",
+   "label": "actividades locales",
+   "weight": 0.6,
+   "status": "planned"
+  },
+  {
+   "from": "e_semf",
+   "to": "f_semf",
+   "label": "titular",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "e_cg",
+   "to": "f_cg",
+   "label": "titular",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "e_bo",
+   "to": "f_bo",
+   "label": "titular",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "f_cloudy",
+   "to": "p_books",
+   "label": "produce",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "f_cloudy",
+   "to": "p_sessions",
+   "label": "produce",
+   "weight": 0.9,
+   "status": "planned"
+  },
+  {
+   "from": "f_semf",
+   "to": "p_events",
+   "label": "organiza",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "f_semf",
+   "to": "p_ciclo",
+   "label": "organiza",
+   "weight": 0.9,
+   "status": "planned"
+  },
+  {
+   "from": "f_cg",
+   "to": "p_consult",
+   "label": "vende",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "f_cg",
+   "to": "p_lib",
+   "label": "desarrolla",
+   "weight": 0.9,
+   "status": "planned"
+  },
+  {
+   "from": "f_cg",
+   "to": "p_eval",
+   "label": "aporta",
+   "weight": 0.9,
+   "status": "planned"
+  },
+  {
+   "from": "f_bo",
+   "to": "p_hub",
+   "label": "opera",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "f_bo",
+   "to": "p_cowork",
+   "label": "opera",
+   "weight": 0.9,
+   "status": "planned"
+  },
+  {
+   "from": "f_bo",
+   "to": "p_coliving",
+   "label": "opera",
+   "weight": 0.6,
+   "status": "planned"
+  },
+  {
+   "from": "f_bo",
+   "to": "p_lib",
+   "label": "desarrollo",
+   "weight": 0.6,
+   "status": "planned"
+  },
+  {
+   "from": "e_fund",
+   "to": "p_space",
+   "label": "titular",
+   "weight": 0.9,
+   "status": "planned"
+  },
+  {
+   "from": "p_space",
+   "to": "p_cowork",
+   "label": "aloja",
+   "weight": 0.9,
+   "status": "planned"
+  },
+  {
+   "from": "p_space",
+   "to": "p_ciclo",
+   "label": "aloja",
+   "weight": 0.6,
+   "status": "planned"
+  },
+  {
+   "from": "p_eval",
+   "to": "p_books",
+   "label": "mide impacto",
+   "weight": 0.3,
+   "status": "planned"
+  },
+  {
+   "from": "p_eval",
+   "to": "p_ciclo",
+   "label": "mide impacto",
+   "weight": 0.3,
+   "status": "planned"
+  },
+  {
+   "from": "x_csic",
+   "to": "f_cg",
+   "label": "investigador externo",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "x_csic",
+   "to": "p_lib",
+   "label": "dirección científica",
+   "weight": 0.6,
+   "status": "planned"
+  },
+  {
+   "from": "x_uned",
+   "to": "f_semf",
+   "label": "aval académico",
+   "weight": 0.6,
+   "status": "planned"
+  },
+  {
+   "from": "x_uned",
+   "to": "p_sessions",
+   "label": "estudiantes de Física",
+   "weight": 0.6,
+   "status": "planned"
+  },
+  {
+   "from": "x_idiphisa",
+   "to": "f_cg",
+   "label": "socio clínico",
+   "weight": 0.6,
+   "status": "planned"
+  },
+  {
+   "from": "x_lr",
+   "to": "p_space",
+   "label": "convenio / cesión",
+   "weight": 0.9,
+   "status": "planned"
+  },
+  {
+   "from": "x_lr",
+   "to": "p_hub",
+   "label": "ecosistema tech",
+   "weight": 0.6,
+   "status": "planned"
+  },
+  {
+   "from": "s_politica",
+   "to": "s_bancos",
+   "label": "banca pública y regulación",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_politica",
+   "to": "s_arte",
+   "label": "política cultural",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_bancos",
+   "to": "s_arte",
+   "label": "mecenazgo",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_politica",
+   "to": "e_fund",
+   "label": "protectorado y convenios",
+   "weight": 0.9,
+   "status": "planned"
+  },
+  {
+   "from": "s_bancos",
+   "to": "e_fund",
+   "label": "patronos y mecenazgo",
+   "weight": 0.6,
+   "status": "planned"
+  },
+  {
+   "from": "s_arte",
+   "to": "e_fund",
+   "label": "programa cultural",
+   "weight": 0.6,
+   "status": "planned"
+  },
+  {
+   "from": "s_arte",
+   "to": "f_semf",
+   "label": "confluencia arte-ciencia",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_arte",
+   "to": "f_cloudy",
+   "label": "ilustración y edición",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_bancos",
+   "to": "f_bo",
+   "label": "inversión y crédito",
+   "weight": 0.6,
+   "status": "planned"
+  },
+  {
+   "from": "s_politica",
+   "to": "x_lr",
+   "label": "gobierno local",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "s_politica",
+   "to": "x_csic",
+   "label": "investigación pública",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_politica",
+   "to": "x_uned",
+   "label": "universidad pública",
+   "weight": 0.3,
+   "status": "exists"
+  },
+  {
+   "from": "e_cosmo",
+   "to": "f_cosmo",
+   "label": "titular",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "f_cosmo",
+   "to": "p_cv_consult",
+   "label": "vende",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "f_cosmo",
+   "to": "p_cv_games",
+   "label": "desarrolla",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "f_cosmo",
+   "to": "p_cv_talleres",
+   "label": "organiza",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "f_cosmo",
+   "to": "p_cv_music",
+   "label": "línea artística",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "p_cv_games",
+   "to": "p_books",
+   "label": "juegos para libros y cartas",
+   "weight": 0.6,
+   "status": "planned"
+  },
+  {
+   "from": "p_cv_talleres",
+   "to": "p_ciclo",
+   "label": "talleres arte-astronomía",
+   "weight": 0.6,
+   "status": "planned"
+  },
+  {
+   "from": "p_cv_talleres",
+   "to": "p_events",
+   "label": "formatos para congresos",
+   "weight": 0.3,
+   "status": "planned"
+  },
+  {
+   "from": "f_cosmo",
+   "to": "e_fund",
+   "label": "aporta a la fundación",
+   "weight": 0.3,
+   "status": "planned"
+  },
+  {
+   "from": "s_arte",
+   "to": "f_cosmo",
+   "label": "música y formatos culturales",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_bancos",
+   "to": "f_cosmo",
+   "label": "inversión y préstamos de honor",
+   "weight": 0.3,
+   "status": "planned"
+  },
+  {
+   "from": "s_sociedad",
+   "to": "s_politica",
+   "label": "demanda y voto",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_sociedad",
+   "to": "s_arte",
+   "label": "público y tradición cultural",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_politica",
+   "to": "s_ciencia",
+   "label": "financiación pública de la I+D",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_ciencia",
+   "to": "s_tecnologia",
+   "label": "transferencia de conocimiento",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "s_bancos",
+   "to": "s_tecnologia",
+   "label": "capital riesgo",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_ciencia",
+   "to": "s_arte",
+   "label": "confluencia arte-ciencia",
+   "weight": 0.3,
+   "status": "exists"
+  },
+  {
+   "from": "s_ciencia",
+   "to": "e_fund",
+   "label": "misión científica y patronos académicos",
+   "weight": 0.6,
+   "status": "planned"
+  },
+  {
+   "from": "s_tecnologia",
+   "to": "e_fund",
+   "label": "herramientas y socios tecnológicos",
+   "weight": 0.3,
+   "status": "planned"
+  },
+  {
+   "from": "s_sociedad",
+   "to": "e_fund",
+   "label": "fin social, voluntariado y donantes",
+   "weight": 0.6,
+   "status": "planned"
+  },
+  {
+   "from": "s_ciencia",
+   "to": "f_semf",
+   "label": "frontera de la investigación",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_ciencia",
+   "to": "f_cg",
+   "label": "métodos causales",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_ciencia",
+   "to": "f_cosmo",
+   "label": "astrofísica",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_ciencia",
+   "to": "x_csic",
+   "label": "investigación",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_ciencia",
+   "to": "x_uned",
+   "label": "docencia en Física",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_tecnologia",
+   "to": "f_bo",
+   "label": "ecosistema de startups",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "s_tecnologia",
+   "to": "f_cg",
+   "label": "IA y datos de salud",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_tecnologia",
+   "to": "f_cosmo",
+   "label": "evaluación de IA",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_sociedad",
+   "to": "f_cloudy",
+   "label": "familias y salud",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_sociedad",
+   "to": "e_asoc",
+   "label": "tejido asociativo local",
+   "weight": 0.6,
+   "status": "planned"
+  },
+  {
+   "from": "s_sociedad",
+   "to": "f_bo",
+   "label": "demanda de vivienda (coliving)",
+   "weight": 0.3,
+   "status": "exists"
+  },
+  {
+   "from": "f_bo",
+   "to": "p_bo_indago",
+   "label": "opera",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "f_bo",
+   "to": "p_bo_acm",
+   "label": "desarrolla",
+   "weight": 0.9,
+   "status": "planned"
+  },
+  {
+   "from": "f_bo",
+   "to": "p_bo_codevs",
+   "label": "desarrolla",
+   "weight": 0.9,
+   "status": "planned"
+  },
+  {
+   "from": "f_bo",
+   "to": "p_bo_os",
+   "label": "desarrolla",
+   "weight": 0.6,
+   "status": "planned"
+  },
+  {
+   "from": "f_bo",
+   "to": "p_bo_qtc",
+   "label": "propone",
+   "weight": 0.6,
+   "status": "planned"
+  },
+  {
+   "from": "f_bo",
+   "to": "p_bo_modenode",
+   "label": "propone",
+   "weight": 0.3,
+   "status": "planned"
+  },
+  {
+   "from": "f_bo",
+   "to": "p_bo_buildverso",
+   "label": "propone",
+   "weight": 0.3,
+   "status": "planned"
+  },
+  {
+   "from": "f_bo",
+   "to": "p_bo_ptrail",
+   "label": "gestión externa",
+   "weight": 0.6,
+   "status": "planned"
+  },
+  {
+   "from": "f_bo",
+   "to": "p_bo_ignicion",
+   "label": "gestión CPI y comunicación",
+   "weight": 0.6,
+   "status": "planned"
+  },
+  {
+   "from": "e_dako",
+   "to": "f_dako",
+   "label": "titular",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "f_dako",
+   "to": "p_dako_show",
+   "label": "produce",
+   "weight": 0.9,
+   "status": "planned"
+  },
+  {
+   "from": "s_arte",
+   "to": "f_dako",
+   "label": "artes escénicas",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "x_ptrail",
+   "to": "p_bo_ptrail",
+   "label": "titular del proyecto",
+   "weight": 0.9,
+   "status": "planned"
+  },
+  {
+   "from": "x_uned",
+   "to": "p_bo_ignicion",
+   "label": "UNED en el consorcio (neutrónica)",
+   "weight": 0.3,
+   "status": "planned"
+  },
+  {
+   "from": "x_lr",
+   "to": "p_bo_codevs",
+   "label": "piloto municipal",
+   "weight": 0.6,
+   "status": "planned"
+  },
+  {
+   "from": "p_bo_codevs",
+   "to": "p_cowork",
+   "label": "rescata espacios",
+   "weight": 0.6,
+   "status": "planned"
+  },
+  {
+   "from": "p_bo_codevs",
+   "to": "p_space",
+   "label": "busca y adapta el espacio",
+   "weight": 0.6,
+   "status": "planned"
+  },
+  {
+   "from": "f_semf",
+   "to": "p_semf_rac",
+   "label": "organiza",
+   "weight": 0.9,
+   "status": "planned"
+  },
+  {
+   "from": "f_semf",
+   "to": "p_semf_online",
+   "label": "organiza",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "f_semf",
+   "to": "p_semf_video",
+   "label": "produce",
+   "weight": 0.6,
+   "status": "planned"
+  },
+  {
+   "from": "f_semf",
+   "to": "p_semf_book",
+   "label": "propone",
+   "weight": 0.3,
+   "status": "planned"
+  },
+  {
+   "from": "f_semf",
+   "to": "p_semf_retreat",
+   "label": "propone",
+   "weight": 0.3,
+   "status": "planned"
+  },
+  {
+   "from": "x_rac",
+   "to": "p_semf_rac",
+   "label": "sede y difusión",
+   "weight": 0.9,
+   "status": "planned"
+  },
+  {
+   "from": "x_upv",
+   "to": "p_events",
+   "label": "sede de la escuela",
+   "weight": 0.9,
+   "status": "planned"
+  },
+  {
+   "from": "p_semf_rac",
+   "to": "p_ciclo",
+   "label": "formato replicable en Madrid Oeste",
+   "weight": 0.3,
+   "status": "planned"
+  },
+  {
+   "from": "p_events",
+   "to": "p_semf_video",
+   "label": "grabaciones",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "p_semf_rac",
+   "to": "p_semf_video",
+   "label": "grabaciones",
+   "weight": 0.6,
+   "status": "planned"
+  },
+  {
+   "from": "f_cg",
+   "to": "p_cg_formacion",
+   "label": "diseña e imparte",
+   "weight": 0.9,
+   "status": "planned"
+  },
+  {
+   "from": "x_weber",
+   "to": "p_cg_formacion",
+   "label": "coorganiza y da acceso a clínicos y farma",
+   "weight": 0.9,
+   "status": "planned"
+  },
+  {
+   "from": "s_ciencia",
+   "to": "x_weber",
+   "label": "economía de la salud",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_bancos",
+   "to": "x_weber",
+   "label": "industria farmacéutica",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_arte",
+   "to": "e_ddd",
+   "label": "arte para la diversidad",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_sociedad",
+   "to": "e_ddd",
+   "label": "diversidad e inclusión",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "e_ddd",
+   "to": "e_fund",
+   "label": "asociación existente que puede preparar la fundación",
+   "weight": 0.3,
+   "status": "planned"
+  },
+  {
+   "from": "s_politica",
+   "to": "u_ce",
+   "label": "canaliza",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "s_ciencia",
+   "to": "u_ce",
+   "label": "canaliza",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_tecnologia",
+   "to": "u_ce",
+   "label": "canaliza",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_politica",
+   "to": "u_cost",
+   "label": "canaliza",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "s_ciencia",
+   "to": "u_cost",
+   "label": "canaliza",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "s_politica",
+   "to": "u_nlnet",
+   "label": "canaliza",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_tecnologia",
+   "to": "u_nlnet",
+   "label": "canaliza",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "s_politica",
+   "to": "u_fecyt",
+   "label": "canaliza",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "s_ciencia",
+   "to": "u_fecyt",
+   "label": "canaliza",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "s_sociedad",
+   "to": "u_fecyt",
+   "label": "canaliza",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_politica",
+   "to": "u_cdti",
+   "label": "canaliza",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "s_bancos",
+   "to": "u_cdti",
+   "label": "canaliza",
+   "weight": 0.3,
+   "status": "exists"
+  },
+  {
+   "from": "s_tecnologia",
+   "to": "u_cdti",
+   "label": "canaliza",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "s_bancos",
+   "to": "u_enisa",
+   "label": "canaliza",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "s_politica",
+   "to": "u_enisa",
+   "label": "canaliza",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_tecnologia",
+   "to": "u_enisa",
+   "label": "canaliza",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_politica",
+   "to": "u_vivienda",
+   "label": "canaliza",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "s_sociedad",
+   "to": "u_vivienda",
+   "label": "canaliza",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_politica",
+   "to": "u_cam",
+   "label": "canaliza",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "s_politica",
+   "to": "u_madrimasd",
+   "label": "canaliza",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "s_ciencia",
+   "to": "u_madrimasd",
+   "label": "canaliza",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_tecnologia",
+   "to": "u_madrimasd",
+   "label": "canaliza",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_arte",
+   "to": "x_lr",
+   "label": "canaliza",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_politica",
+   "to": "u_pozuelo",
+   "label": "canaliza",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "s_arte",
+   "to": "u_pozuelo",
+   "label": "canaliza",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_politica",
+   "to": "u_majadahonda",
+   "label": "canaliza",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "s_bancos",
+   "to": "u_lacaixa",
+   "label": "canaliza",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "s_arte",
+   "to": "u_lacaixa",
+   "label": "canaliza",
+   "weight": 0.3,
+   "status": "exists"
+  },
+  {
+   "from": "s_ciencia",
+   "to": "u_lacaixa",
+   "label": "canaliza",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_sociedad",
+   "to": "u_lacaixa",
+   "label": "canaliza",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_arte",
+   "to": "u_carasso",
+   "label": "canaliza",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "s_sociedad",
+   "to": "u_carasso",
+   "label": "canaliza",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_bancos",
+   "to": "u_inversores",
+   "label": "canaliza",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "s_tecnologia",
+   "to": "u_inversores",
+   "label": "canaliza",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_bancos",
+   "to": "u_sabadell",
+   "label": "canaliza",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "s_tecnologia",
+   "to": "u_sabadell",
+   "label": "canaliza",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_bancos",
+   "to": "u_bolsasocial",
+   "label": "canaliza",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_sociedad",
+   "to": "u_bolsasocial",
+   "label": "canaliza",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "s_bancos",
+   "to": "u_ship2b",
+   "label": "canaliza",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "s_sociedad",
+   "to": "u_ship2b",
+   "label": "canaliza",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "s_politica",
+   "to": "u_bpifrance",
+   "label": "canaliza",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "s_bancos",
+   "to": "u_bpifrance",
+   "label": "canaliza",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_tecnologia",
+   "to": "u_bpifrance",
+   "label": "canaliza",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_bancos",
+   "to": "u_reseau",
+   "label": "canaliza",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_tecnologia",
+   "to": "u_reseau",
+   "label": "canaliza",
+   "weight": 0.3,
+   "status": "exists"
+  },
+  {
+   "from": "s_bancos",
+   "to": "u_eafunds",
+   "label": "canaliza",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_tecnologia",
+   "to": "u_eafunds",
+   "label": "canaliza",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "s_sociedad",
+   "to": "u_eafunds",
+   "label": "canaliza",
+   "weight": 0.3,
+   "status": "exists"
+  },
+  {
+   "from": "s_politica",
+   "to": "u_cnc",
+   "label": "canaliza",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "s_arte",
+   "to": "u_cnc",
+   "label": "canaliza",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "s_tecnologia",
+   "to": "u_cnc",
+   "label": "canaliza",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_politica",
+   "to": "u_madrid_ayto",
+   "label": "canaliza",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "s_arte",
+   "to": "u_madrid_ayto",
+   "label": "canaliza",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "s_politica",
+   "to": "u_gva",
+   "label": "canaliza",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "s_ciencia",
+   "to": "u_gva",
+   "label": "canaliza",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_politica",
+   "to": "u_valencia_ayto",
+   "label": "canaliza",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_arte",
+   "to": "u_valencia_ayto",
+   "label": "canaliza",
+   "weight": 0.9,
+   "status": "exists"
+  }
+ ],
+ "figure": {
+  "shape": "octaedro",
+  "centre": "e_fund",
+  "vertices": {
+   "s_tecnologia": [
+    0,
+    1,
+    0
+   ],
+   "s_sociedad": [
+    0,
+    -1,
+    0
+   ],
+   "s_bancos": [
+    1,
+    0,
+    0
+   ],
+   "s_ciencia": [
+    -1,
+    0,
+    0
+   ],
+   "s_politica": [
+    0,
+    0,
+    1
+   ],
+   "s_arte": [
+    0,
+    0,
+    -1
+   ]
+  },
+  "frame": [
+   [
+    "s_tecnologia",
+    "s_bancos"
+   ],
+   [
+    "s_tecnologia",
+    "s_ciencia"
+   ],
+   [
+    "s_tecnologia",
+    "s_politica"
+   ],
+   [
+    "s_tecnologia",
+    "s_arte"
+   ],
+   [
+    "s_sociedad",
+    "s_bancos"
+   ],
+   [
+    "s_sociedad",
+    "s_ciencia"
+   ],
+   [
+    "s_sociedad",
+    "s_politica"
+   ],
+   [
+    "s_sociedad",
+    "s_arte"
+   ],
+   [
+    "s_bancos",
+    "s_politica"
+   ],
+   [
+    "s_bancos",
+    "s_arte"
+   ],
+   [
+    "s_ciencia",
+    "s_politica"
+   ],
+   [
+    "s_ciencia",
+    "s_arte"
+   ]
+  ],
+  "axes": [
+   [
+    "s_tecnologia",
+    "s_sociedad"
+   ],
+   [
+    "s_bancos",
+    "s_ciencia"
+   ],
+   [
+    "s_politica",
+    "s_arte"
+   ]
+  ],
+  "top": [
+   "s_tecnologia",
+   "s_bancos",
+   "s_politica"
+  ]
+ }
+}
