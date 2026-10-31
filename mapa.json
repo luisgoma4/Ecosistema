@@ -770,6 +770,15 @@
    "face": null,
    "detail": "Financiador · esfera: Política, Arte",
    "pending": false
+  },
+  {
+   "id": "u_villanueva",
+   "label": "Ayto. Villanueva de la Cañada",
+   "kind": "funder",
+   "status": "external",
+   "face": null,
+   "detail": "Financiador · esfera: Política, Arte",
+   "pending": false
   }
  ],
  "edges": [
@@ -1933,6 +1942,20 @@
    "to": "u_valencia_ayto",
    "label": "canaliza",
    "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "s_politica",
+   "to": "u_villanueva",
+   "label": "canaliza",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_arte",
+   "to": "u_villanueva",
+   "label": "canaliza",
+   "weight": 0.3,
    "status": "exists"
   }
  ],
