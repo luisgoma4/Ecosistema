@@ -32,8 +32,8 @@
  */
 (function () {
   "use strict";
-  const KIND_ES = { entity: "figura legal", face: "cara", product: "producto", partner: "socio", factor: "factor de contexto",
-    milestone: "hito", call: "convocatoria", sphere: "esfera del mundo", funder: "financiador" };
+  const KIND_ES = { entity: "figura legal", project: "proyecto", resource: "recurso", product: "producto", partner: "socio", factor: "factor de contexto",
+    resource: "recurso", call: "convocatoria", sphere: "esfera del mundo", funder: "financiador" };
   const STATUS_ES = { exists: "existe", planned: "por crear", proposed: "propuesta", external: "socio externo", factor: "factor" };
   const FACE_VAR = { cloudy: "--line-cloudy", semf: "--line-semf", causality: "--line-causality", branchout: "--line-branchout", delfina: "--line-delfina", cosmo: "--line-cosmo", dako: "--line-dako" };
   const LIB3D = "vendor/3d-force-graph.min.js";
@@ -87,7 +87,7 @@
     const retheme = () => { palette(); renderLegend(); paint3(); };
     new MutationObserver(retheme).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
     if (window.matchMedia) matchMedia("(prefers-color-scheme: dark)").addEventListener("change", retheme);
-    const colorOf = (n) => n.kind === "sphere" ? C.sphere : n.kind === "funder" ? C.funder : n.kind === "milestone" || !n.face ? C.muted : C.face[n.face] || C.muted;
+    const colorOf = (n) => n.kind === "sphere" ? C.sphere : n.kind === "funder" ? C.funder : n.kind === "resource" || !n.face ? C.muted : C.face[n.face] || C.muted;
     const alpha = (hex, a) => { if (!hex || hex[0] !== "#") return hex; const h = hex.length === 4 ? hex.replace(/#(.)(.)(.)/, "#$1$1$2$2$3$3") : hex;
       return `rgba(${parseInt(h.slice(1, 3), 16)},${parseInt(h.slice(3, 5), 16)},${parseInt(h.slice(5, 7), 16)},${a})`; };
 
@@ -126,7 +126,7 @@
       return (sp > max * 0.5 ? cut.slice(0, sp) : cut).replace(/[\s,·—–:-]+$/, "") + "…";
     }
     const labelOf = (n) => (isMain(n) ? n.label : shortLabel(n.label, hl.size ? 22 : 30));
-    const radius = (n) => (n.kind === "sphere" ? 10 : n.kind === "milestone" ? 2 : 2.6) + Math.sqrt(n.deg || 0) * 1.25;
+    const radius = (n) => (n.kind === "sphere" ? 10 : n.kind === "resource" ? 2 : 2.6) + Math.sqrt(n.deg || 0) * 1.25;
 
     // ---- 2D engine ----
     fg2 = new ForceGraph(stage2)
@@ -511,7 +511,7 @@
       legend.replaceChildren(...[...chips,
         world ? el("span", { class: "net-key" }, el("span", { class: "net-dot dia", style: `background:${C.sphere}` }), "esfera") : null,
         world ? el("span", { class: "net-key" }, el("span", { class: "net-dot sq", style: `background:${C.funder}` }), "financiador") : null,
-        G.nodes.some((n) => n.kind === "milestone") ? el("span", { class: "net-key" }, el("span", { class: "net-dot", style: `background:${C.muted}` }), "hito") : null,
+        G.nodes.some((n) => n.kind === "resource") ? el("span", { class: "net-key" }, el("span", { class: "net-dot", style: `background:${C.muted}` }), "recurso") : null,
         el("span", { class: "net-key" }, el("span", { class: "net-dot hol" }), "aún no existe")].filter(Boolean));
     }
 

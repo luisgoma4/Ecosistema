@@ -70,36 +70,36 @@
    "pending": false
   },
   {
-   "id": "f_cloudy",
+   "id": "p_cloudy",
    "label": "Cloudy",
-   "kind": "face",
+   "kind": "project",
    "status": "exists",
    "face": "cloudy",
    "detail": "Proyecto sin ánimo de lucro de divulgación científica para familias; sin figura legal propia.",
    "pending": false
   },
   {
-   "id": "f_semf",
+   "id": "p_semf",
    "label": "SEMF",
-   "kind": "face",
+   "kind": "project",
    "status": "exists",
    "face": "semf",
    "detail": "Red interdisciplinar internacional. Ciclo anual de octubre a septiembre: escuela en Valencia, talleres en Madrid y actividades online.",
    "pending": false
   },
   {
-   "id": "f_cg",
+   "id": "p_causality",
    "label": "Causality Graphs",
-   "kind": "face",
+   "kind": "project",
    "status": "exists",
    "face": "causality",
    "detail": "Inferencia causal y datos de salud.",
    "pending": false
   },
   {
-   "id": "f_bo",
+   "id": "p_branchout",
    "label": "BranchOut",
-   "kind": "face",
+   "kind": "project",
    "status": "exists",
    "face": "branchout",
    "detail": "Hub de startups tecnológicas.",
@@ -277,9 +277,9 @@
    "pending": false
   },
   {
-   "id": "f_cosmo",
+   "id": "p_cosmo",
    "label": "CosmoVentures",
-   "kind": "face",
+   "kind": "project",
    "status": "exists",
    "face": "cosmo",
    "detail": "Estudio científico: consultoría, evaluación de IA, juegos educativos y formatos culturales (cosmoventures.fr).",
@@ -358,9 +358,9 @@
    "pending": false
   },
   {
-   "id": "f_dako",
+   "id": "p_dako",
    "label": "El Gran DaKo",
-   "kind": "face",
+   "kind": "project",
    "status": "exists",
    "face": "dako",
    "detail": "Artes escénicas: poesía y música en directo.",
@@ -784,27 +784,27 @@
  "edges": [
   {
    "from": "e_fund",
-   "to": "f_cloudy",
+   "to": "p_cloudy",
    "label": "vehículo legal",
    "weight": 0.6,
    "status": "planned"
   },
   {
    "from": "e_fund",
-   "to": "f_semf",
+   "to": "p_semf",
    "label": "acoge en Madrid",
    "weight": 0.6,
    "status": "planned"
   },
   {
-   "from": "f_cg",
+   "from": "p_causality",
    "to": "e_fund",
    "label": "aporta a la fundación",
    "weight": 0.3,
    "status": "planned"
   },
   {
-   "from": "f_bo",
+   "from": "p_branchout",
    "to": "e_fund",
    "label": "aporta a la fundación",
    "weight": 0.3,
@@ -812,111 +812,111 @@
   },
   {
    "from": "e_asoc",
-   "to": "f_cloudy",
+   "to": "p_cloudy",
    "label": "actividades locales",
    "weight": 0.6,
    "status": "planned"
   },
   {
    "from": "e_asoc",
-   "to": "f_semf",
+   "to": "p_semf",
    "label": "actividades locales",
    "weight": 0.6,
    "status": "planned"
   },
   {
    "from": "e_semf",
-   "to": "f_semf",
+   "to": "p_semf",
    "label": "titular",
    "weight": 0.9,
    "status": "exists"
   },
   {
    "from": "e_cg",
-   "to": "f_cg",
+   "to": "p_causality",
    "label": "titular",
    "weight": 0.9,
    "status": "exists"
   },
   {
    "from": "e_bo",
-   "to": "f_bo",
+   "to": "p_branchout",
    "label": "titular",
    "weight": 0.9,
    "status": "exists"
   },
   {
-   "from": "f_cloudy",
+   "from": "p_cloudy",
    "to": "p_books",
    "label": "produce",
    "weight": 0.9,
    "status": "exists"
   },
   {
-   "from": "f_cloudy",
+   "from": "p_cloudy",
    "to": "p_sessions",
    "label": "produce",
    "weight": 0.9,
    "status": "planned"
   },
   {
-   "from": "f_semf",
+   "from": "p_semf",
    "to": "p_events",
    "label": "organiza",
    "weight": 0.9,
    "status": "exists"
   },
   {
-   "from": "f_semf",
+   "from": "p_semf",
    "to": "p_ciclo",
    "label": "organiza",
    "weight": 0.9,
    "status": "planned"
   },
   {
-   "from": "f_cg",
+   "from": "p_causality",
    "to": "p_consult",
    "label": "vende",
    "weight": 0.9,
    "status": "exists"
   },
   {
-   "from": "f_cg",
+   "from": "p_causality",
    "to": "p_lib",
    "label": "desarrolla",
    "weight": 0.9,
    "status": "planned"
   },
   {
-   "from": "f_cg",
+   "from": "p_causality",
    "to": "p_eval",
    "label": "aporta",
    "weight": 0.9,
    "status": "planned"
   },
   {
-   "from": "f_bo",
+   "from": "p_branchout",
    "to": "p_hub",
    "label": "opera",
    "weight": 0.9,
    "status": "exists"
   },
   {
-   "from": "f_bo",
+   "from": "p_branchout",
    "to": "p_cowork",
    "label": "opera",
    "weight": 0.9,
    "status": "planned"
   },
   {
-   "from": "f_bo",
+   "from": "p_branchout",
    "to": "p_coliving",
    "label": "opera",
    "weight": 0.6,
    "status": "planned"
   },
   {
-   "from": "f_bo",
+   "from": "p_branchout",
    "to": "p_lib",
    "label": "desarrollo",
    "weight": 0.6,
@@ -959,7 +959,7 @@
   },
   {
    "from": "x_csic",
-   "to": "f_cg",
+   "to": "p_causality",
    "label": "investigador externo",
    "weight": 0.6,
    "status": "exists"
@@ -973,7 +973,7 @@
   },
   {
    "from": "x_uned",
-   "to": "f_semf",
+   "to": "p_semf",
    "label": "aval académico",
    "weight": 0.6,
    "status": "planned"
@@ -987,7 +987,7 @@
   },
   {
    "from": "x_idiphisa",
-   "to": "f_cg",
+   "to": "p_causality",
    "label": "socio clínico",
    "weight": 0.6,
    "status": "planned"
@@ -1050,21 +1050,21 @@
   },
   {
    "from": "s_arte",
-   "to": "f_semf",
+   "to": "p_semf",
    "label": "confluencia arte-ciencia",
    "weight": 0.6,
    "status": "exists"
   },
   {
    "from": "s_arte",
-   "to": "f_cloudy",
+   "to": "p_cloudy",
    "label": "ilustración y edición",
    "weight": 0.6,
    "status": "exists"
   },
   {
    "from": "s_bancos",
-   "to": "f_bo",
+   "to": "p_branchout",
    "label": "inversión y crédito",
    "weight": 0.6,
    "status": "planned"
@@ -1092,34 +1092,34 @@
   },
   {
    "from": "e_cosmo",
-   "to": "f_cosmo",
+   "to": "p_cosmo",
    "label": "titular",
    "weight": 0.9,
    "status": "exists"
   },
   {
-   "from": "f_cosmo",
+   "from": "p_cosmo",
    "to": "p_cv_consult",
    "label": "vende",
    "weight": 0.9,
    "status": "exists"
   },
   {
-   "from": "f_cosmo",
+   "from": "p_cosmo",
    "to": "p_cv_games",
    "label": "desarrolla",
    "weight": 0.9,
    "status": "exists"
   },
   {
-   "from": "f_cosmo",
+   "from": "p_cosmo",
    "to": "p_cv_talleres",
    "label": "organiza",
    "weight": 0.9,
    "status": "exists"
   },
   {
-   "from": "f_cosmo",
+   "from": "p_cosmo",
    "to": "p_cv_music",
    "label": "línea artística",
    "weight": 0.6,
@@ -1147,7 +1147,7 @@
    "status": "planned"
   },
   {
-   "from": "f_cosmo",
+   "from": "p_cosmo",
    "to": "e_fund",
    "label": "aporta a la fundación",
    "weight": 0.3,
@@ -1155,14 +1155,14 @@
   },
   {
    "from": "s_arte",
-   "to": "f_cosmo",
+   "to": "p_cosmo",
    "label": "música y formatos culturales",
    "weight": 0.6,
    "status": "exists"
   },
   {
    "from": "s_bancos",
-   "to": "f_cosmo",
+   "to": "p_cosmo",
    "label": "inversión y préstamos de honor",
    "weight": 0.3,
    "status": "planned"
@@ -1232,21 +1232,21 @@
   },
   {
    "from": "s_ciencia",
-   "to": "f_semf",
+   "to": "p_semf",
    "label": "frontera de la investigación",
    "weight": 0.6,
    "status": "exists"
   },
   {
    "from": "s_ciencia",
-   "to": "f_cg",
+   "to": "p_causality",
    "label": "métodos causales",
    "weight": 0.6,
    "status": "exists"
   },
   {
    "from": "s_ciencia",
-   "to": "f_cosmo",
+   "to": "p_cosmo",
    "label": "astrofísica",
    "weight": 0.6,
    "status": "exists"
@@ -1267,28 +1267,28 @@
   },
   {
    "from": "s_tecnologia",
-   "to": "f_bo",
+   "to": "p_branchout",
    "label": "ecosistema de startups",
    "weight": 0.9,
    "status": "exists"
   },
   {
    "from": "s_tecnologia",
-   "to": "f_cg",
+   "to": "p_causality",
    "label": "IA y datos de salud",
    "weight": 0.6,
    "status": "exists"
   },
   {
    "from": "s_tecnologia",
-   "to": "f_cosmo",
+   "to": "p_cosmo",
    "label": "evaluación de IA",
    "weight": 0.6,
    "status": "exists"
   },
   {
    "from": "s_sociedad",
-   "to": "f_cloudy",
+   "to": "p_cloudy",
    "label": "familias y salud",
    "weight": 0.6,
    "status": "exists"
@@ -1302,69 +1302,69 @@
   },
   {
    "from": "s_sociedad",
-   "to": "f_bo",
+   "to": "p_branchout",
    "label": "demanda de vivienda (coliving)",
    "weight": 0.3,
    "status": "exists"
   },
   {
-   "from": "f_bo",
+   "from": "p_branchout",
    "to": "p_bo_indago",
    "label": "opera",
    "weight": 0.9,
    "status": "exists"
   },
   {
-   "from": "f_bo",
+   "from": "p_branchout",
    "to": "p_bo_acm",
    "label": "desarrolla",
    "weight": 0.9,
    "status": "planned"
   },
   {
-   "from": "f_bo",
+   "from": "p_branchout",
    "to": "p_bo_codevs",
    "label": "desarrolla",
    "weight": 0.9,
    "status": "planned"
   },
   {
-   "from": "f_bo",
+   "from": "p_branchout",
    "to": "p_bo_os",
    "label": "desarrolla",
    "weight": 0.6,
    "status": "planned"
   },
   {
-   "from": "f_bo",
+   "from": "p_branchout",
    "to": "p_bo_qtc",
    "label": "propone",
    "weight": 0.6,
    "status": "planned"
   },
   {
-   "from": "f_bo",
+   "from": "p_branchout",
    "to": "p_bo_modenode",
    "label": "propone",
    "weight": 0.3,
    "status": "planned"
   },
   {
-   "from": "f_bo",
+   "from": "p_branchout",
    "to": "p_bo_buildverso",
    "label": "propone",
    "weight": 0.3,
    "status": "planned"
   },
   {
-   "from": "f_bo",
+   "from": "p_branchout",
    "to": "p_bo_ptrail",
    "label": "gestión externa",
    "weight": 0.6,
    "status": "planned"
   },
   {
-   "from": "f_bo",
+   "from": "p_branchout",
    "to": "p_bo_ignicion",
    "label": "gestión CPI y comunicación",
    "weight": 0.6,
@@ -1372,13 +1372,13 @@
   },
   {
    "from": "e_dako",
-   "to": "f_dako",
+   "to": "p_dako",
    "label": "titular",
    "weight": 0.9,
    "status": "exists"
   },
   {
-   "from": "f_dako",
+   "from": "p_dako",
    "to": "p_dako_show",
    "label": "produce",
    "weight": 0.9,
@@ -1386,7 +1386,7 @@
   },
   {
    "from": "s_arte",
-   "to": "f_dako",
+   "to": "p_dako",
    "label": "artes escénicas",
    "weight": 0.6,
    "status": "exists"
@@ -1427,35 +1427,35 @@
    "status": "planned"
   },
   {
-   "from": "f_semf",
+   "from": "p_semf",
    "to": "p_semf_rac",
    "label": "organiza",
    "weight": 0.9,
    "status": "planned"
   },
   {
-   "from": "f_semf",
+   "from": "p_semf",
    "to": "p_semf_online",
    "label": "organiza",
    "weight": 0.6,
    "status": "exists"
   },
   {
-   "from": "f_semf",
+   "from": "p_semf",
    "to": "p_semf_video",
    "label": "produce",
    "weight": 0.6,
    "status": "planned"
   },
   {
-   "from": "f_semf",
+   "from": "p_semf",
    "to": "p_semf_book",
    "label": "propone",
    "weight": 0.3,
    "status": "planned"
   },
   {
-   "from": "f_semf",
+   "from": "p_semf",
    "to": "p_semf_retreat",
    "label": "propone",
    "weight": 0.3,
@@ -1497,7 +1497,7 @@
    "status": "planned"
   },
   {
-   "from": "f_cg",
+   "from": "p_causality",
    "to": "p_cg_formacion",
    "label": "diseña e imparte",
    "weight": 0.9,
