@@ -22,6 +22,19 @@
  * controls are out of sight. It is a toggle (aria-pressed = in 3D).
  * weights: false hides the weight number in the card (the public map shows edges by thickness only).
  *
+ * Opt-in options for a host with its own panels (the Núcleo); with none of them the view is exactly as before:
+ *   onSelect(id)  called whenever a node is selected (click, search, a card link, focus()).
+ *   onOpen(id)    a "double click": two clicks on the same node within 300 ms call it instead of a second select.
+ *   card: false   never show the built-in card (the host shows its own ficha).
+ *   legend: false hide the face chips and keys (the host has its own filters and legend).
+ *   height()      the view's height in px, instead of the default (72% of the window, 380-720 px).
+ *   font          canvas label font family (default: the system sans).
+ * Extra node layers, by data: a node with capa "sujeto" is drawn as a ring (its face colour), one with capa
+ * "accion" as a small grey rhombus (token --grey, else --muted), in 2D and 3D (3D: a wire sphere and an
+ * octahedron). An edge with a capa other than "causa" (rol, hace, sobre...) is drawn thin and dotted, without
+ * arrow (3D: a faint line) and pulls weakly. They are part of "our graph", so the diamond wraps them too.
+ * Host filters: call setData() again with the filtered nodes and edges; positions are kept by id.
+ *
  * Interaction: drag nodes, wheel/pinch zoom, drag the background to pan (2D) or orbit (3D). Hover lights a node
  * and its neighbours (particles travel cause -> effect); click pins the selection and opens its card; the card
  * lists causes and effects (click to follow). Faces in the legend filter. The diamond is the world figure
@@ -69,8 +82,9 @@
     const btnFit = el("button", { type: "button", class: "net-btn", title: "Encajar todo", "aria-label": "Encajar todo el grafo" }, "⤧");
     const btnFull = el("button", { type: "button", class: "net-btn", title: "Pantalla completa", "aria-label": "Ver el grafo a pantalla completa", "aria-pressed": "false" }, "⛶");
     const tools = el("div", { class: "net-tools" }, search, list, btnDim, btnFit, btnFull);
-    const legend = el("div", { class: "net-legend", role: "group", "aria-label": "Filtrar por cara" });
+    const legend = el("div", { class: "net-legend", role: "group", "aria-label": "Filtrar por cara", hidden: opts.legend === false });
     const card = el("aside", { class: "net-card", "aria-live": "polite", hidden: true });
+    const FONT = opts.font || "-apple-system, system-ui, sans-serif";
     const note = el("div", { class: "net-note", role: "status" });
     wrap.append(stage2, stage3, labels, tools, legend, card, note);
     host.replaceChildren(wrap);
@@ -80,14 +94,15 @@
     function palette() {
       const cs = getComputedStyle(document.documentElement), v = (k) => cs.getPropertyValue(k).trim();
       C = { ink: v("--ink"), ink2: v("--ink-2"), muted: v("--muted"), axis: v("--axis"), grid: v("--grid"), surface: v("--surface"),
-        page: v("--page"), accent: v("--accent"), sphere: v("--world-sphere"), funder: v("--world-funder"), face: {} };
+        page: v("--page"), accent: v("--accent"), sphere: v("--world-sphere"), funder: v("--world-funder"), grey: v("--grey"), face: {} };
       for (const [f, k] of Object.entries(FACE_VAR)) C.face[f] = v(k);
     }
     palette();
     const retheme = () => { palette(); renderLegend(); paint3(); };
     new MutationObserver(retheme).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
     if (window.matchMedia) matchMedia("(prefers-color-scheme: dark)").addEventListener("change", retheme);
-    const colorOf = (n) => n.kind === "sphere" ? C.sphere : n.kind === "funder" ? C.funder : n.kind === "resource" || !n.face ? C.muted : C.face[n.face] || C.muted;
+    const colorOf = (n) => n.capa === "accion" ? C.grey || C.muted : n.capa === "sujeto" ? (n.face && C.face[n.face]) || C.ink2
+      : n.kind === "sphere" ? C.sphere : n.kind === "funder" ? C.funder : n.kind === "resource" || !n.face ? C.muted : C.face[n.face] || C.muted;
     const alpha = (hex, a) => { if (!hex || hex[0] !== "#") return hex; const h = hex.length === 4 ? hex.replace(/#(.)(.)(.)/, "#$1$1$2$2$3$3") : hex;
       return `rgba(${parseInt(h.slice(1, 3), 16)},${parseInt(h.slice(3, 5), 16)},${parseInt(h.slice(5, 7), 16)},${a})`; };
 
@@ -95,6 +110,7 @@
     let G = { nodes: [], edges: [] }, meta = {}, nbr = {}, hidden = new Set(), hover = null, sel = null, hl = new Set(), hlLinks = new Set(), route = [];
     let FIG = null;  // the world figure of the current graph, or null (graph without the diamond)
     const isWorld = (n) => n.kind === "sphere" || n.kind === "funder";
+    const cross = (l) => !!l.capa && l.capa !== "causa";  // a non-causal layer edge (rol, hace, sobre...)
     // 2D shows the 3D axes in isometric view: the three orthogonal axes at 120°, each pair of spheres opposite
     // through the centre (y up in 3D, down on the canvas).
     const iso = (v) => [(v[0] - v[2]) * Math.sqrt(3) / 2, -v[1] + (v[0] + v[2]) / 2];
@@ -126,7 +142,8 @@
       return (sp > max * 0.5 ? cut.slice(0, sp) : cut).replace(/[\s,·—–:-]+$/, "") + "…";
     }
     const labelOf = (n) => (isMain(n) ? n.label : shortLabel(n.label, hl.size ? 22 : 30));
-    const radius = (n) => (n.kind === "sphere" ? 10 : n.kind === "resource" ? 2 : 2.6) + Math.sqrt(n.deg || 0) * 1.25;
+    const radius = (n) => n.capa === "accion" ? 2.4 + Math.sqrt(n.deg || 0) * 0.5 : n.capa === "sujeto" ? 4 + Math.sqrt(n.deg || 0) * 0.8
+      : (n.kind === "sphere" ? 10 : n.kind === "resource" ? 2 : 2.6) + Math.sqrt(n.deg || 0) * 1.25;
 
     // ---- 2D engine ----
     fg2 = new ForceGraph(stage2)
@@ -140,15 +157,18 @@
         ctx.beginPath();
         if (n.kind === "sphere") { ctx.moveTo(n.x, n.y - r * 1.3); ctx.lineTo(n.x + r * 1.1, n.y); ctx.lineTo(n.x, n.y + r * 1.3); ctx.lineTo(n.x - r * 1.1, n.y); ctx.closePath(); }
         else if (n.kind === "funder") ctx.rect(n.x - r * 0.85, n.y - r * 0.85, r * 1.7, r * 1.7);
+        else if (n.capa === "accion") { ctx.moveTo(n.x, n.y - r * 1.3); ctx.lineTo(n.x + r * 1.3, n.y); ctx.lineTo(n.x, n.y + r * 1.3); ctx.lineTo(n.x - r * 1.3, n.y); ctx.closePath(); }
         else ctx.arc(n.x, n.y, r, 0, 2 * Math.PI);
-        if (exists(n) && !n.pending) { ctx.fillStyle = col; ctx.fill(); }
+        if (n.capa === "sujeto") { ctx.fillStyle = C.page; ctx.fill(); ctx.lineWidth = 1.6; ctx.strokeStyle = col; ctx.stroke(); }
+        else if (n.capa === "accion") { ctx.fillStyle = col; ctx.fill(); }
+        else if (exists(n) && !n.pending) { ctx.fillStyle = col; ctx.fill(); }
         else { ctx.fillStyle = C.surface; ctx.fill(); ctx.setLineDash(n.pending ? [1.2, 1.6] : [2.2, 1.6]); ctx.lineWidth = 1.4; ctx.strokeStyle = col; ctx.stroke(); ctx.setLineDash([]); }
         if (n.id === sel || n.id === hover) { ctx.lineWidth = 2 / k + 0.6; ctx.strokeStyle = C.accent; ctx.beginPath(); ctx.arc(n.x, n.y, r + 2.5, 0, 2 * Math.PI); ctx.stroke(); }
         // Labels fade in with zoom, like Obsidian; with something lit, only the lit ones.
         const show = hl.size ? hl.has(n.id) : k > 2.1 || (k > 1.1 && n.r >= 7) || n.r >= 10;
         if (show) {
           const fs = Math.max(10 / k, 2.6), txt = labelOf(n);
-          ctx.font = `${n.id === sel || n.id === hover ? 600 : 500} ${fs}px -apple-system, system-ui, sans-serif`;
+          ctx.font = `${n.id === sel || n.id === hover ? 600 : 500} ${fs}px ${FONT}`;
           ctx.textAlign = "center"; ctx.textBaseline = "top";
           ctx.lineWidth = 3 / k; ctx.strokeStyle = alpha(C.page, 0.85); ctx.strokeText(txt, n.x, n.y + r + 2);
           ctx.fillStyle = dimmed ? C.muted : C.ink; ctx.fillText(txt, n.x, n.y + r + 2);
@@ -157,14 +177,14 @@
       })
       .nodePointerAreaPaint((n, color, ctx) => { ctx.fillStyle = color; ctx.beginPath(); ctx.arc(n.x, n.y, n.r + 2, 0, 2 * Math.PI); ctx.fill(); })
       .linkColor((l) => l.frame ? alpha(C.sphere, hl.size ? 0.3 : 0.85) : hlLinks.has(key(l)) ? C.accent : hl.size ? alpha(C.axis, 0.12) : alpha(C.axis, 0.7))
-      .linkWidth((l) => l.axis ? 1.4 : l.frame ? 2.4 : (hlLinks.has(key(l)) ? 1.2 : 0.4) + (l.weight ?? 0.5) * (hlLinks.has(key(l)) ? 2.6 : 1.6))
-      .linkLineDash((l) => l.axis ? [8, 6] : l.frame ? null : l.status === "planned" ? [3, 2] : null)
-      .linkDirectionalArrowLength((l) => l.frame ? 0 : hlLinks.has(key(l)) ? 5 : 3).linkDirectionalArrowRelPos(1)
+      .linkWidth((l) => cross(l) ? (hlLinks.has(key(l)) ? 1.1 : 0.5) : l.axis ? 1.4 : l.frame ? 2.4 : (hlLinks.has(key(l)) ? 1.2 : 0.4) + (l.weight ?? 0.5) * (hlLinks.has(key(l)) ? 2.6 : 1.6))
+      .linkLineDash((l) => cross(l) ? [1.5, 3] : l.axis ? [8, 6] : l.frame ? null : l.status === "planned" ? [3, 2] : null)
+      .linkDirectionalArrowLength((l) => l.frame || cross(l) ? 0 : hlLinks.has(key(l)) ? 5 : 3).linkDirectionalArrowRelPos(1)
       .linkDirectionalArrowColor((l) => hlLinks.has(key(l)) ? C.accent : hl.size ? alpha(C.axis, 0.12) : C.axis)
       .linkDirectionalParticles((l) => hlLinks.has(key(l)) ? 2 : 0).linkDirectionalParticleWidth(2.2)
       .linkDirectionalParticleSpeed((l) => 0.004 + (l.weight ?? 0.5) * 0.008).linkDirectionalParticleColor(() => C.accent)
       .onNodeHover((n) => { hover = n ? n.id : null; stage2.style.cursor = n ? "pointer" : "grab"; if (!sel) lightUp(hover); })
-      .onNodeClick((n) => select(n.id, false))
+      .onNodeClick((n) => click(n.id))
       .onBackgroundClick(() => clear())
       .onNodeDragEnd((n) => { if (!n.pin) { n.fx = undefined; n.fy = undefined; } })  // released nodes float back, as in Obsidian
       .autoPauseRedraw(false)  // hover light and particles need frames after the layout settles
@@ -179,7 +199,7 @@
       const free = (l) => !(l.frame || (FIG && (isWorld(l.source) || isWorld(l.target))));
       fg.d3Force("charge").strength((n) => FIG && isWorld(n) ? 0 : -40 - n.r * 14).distanceMax(420);
       fg.d3Force("link").distance((l) => 26 + (1 - (l.weight ?? 0.5)) * 46 + (l.source.r || 5) + (l.target.r || 5))
-        .strength((l) => free(l) ? 0.15 + (l.weight ?? 0.5) * 0.5 : 0);
+        .strength((l) => !free(l) ? 0 : cross(l) ? 0.12 : 0.15 + (l.weight ?? 0.5) * 0.5);
       fg.d3Force("collide", collide());
       // The engine's own centring averages ALL nodes, the octahedron included, which then follows that centre: a
       // feedback loop that drifts the graph away. Our centring uses only our graph; the figure is placed around it.
@@ -277,7 +297,7 @@
         .linkDirectionalArrowRelPos(1).linkDirectionalParticleWidth(1.6)
         .linkDirectionalParticleSpeed((l) => 0.004 + (l.weight ?? 0.5) * 0.008)
         .onNodeHover((n) => { hover = n ? n.id : null; stage3.style.cursor = n ? "pointer" : "grab"; if (!sel) lightUp(hover); })
-        .onNodeClick((n) => select(n.id, false))
+        .onNodeClick((n) => click(n.id))
         .onBackgroundClick(() => clear())
         .onNodeDragEnd((n) => { if (!n.pin) { n.fx = n.fy = n.fz = undefined; } })
         .warmupTicks(160).cooldownTicks(300).d3VelocityDecay(0.3);
@@ -291,13 +311,49 @@
     function paint3() {  // 3D accessors are evaluated once: re-set them so the light, filters and theme apply
       if (!fg3) return;
       const lit = (l) => hlLinks.has(key(l));
-      fg3.nodeColor((n) => { const c = colorOf(n), base = exists(n) && !n.pending ? 1 : 0.32; return alpha(c, hl.size && !hl.has(n.id) ? base * 0.15 : base); })
-        .linkColor((l) => l.frame ? alpha(C.sphere, hl.size ? 0.35 : 0.9) : lit(l) ? C.accent : alpha(C.axis, hl.size ? 0.08 : l.status === "planned" ? 0.35 : 0.7))
-        .linkWidth((l) => l.axis ? 1.2 : l.frame ? 2.6 : lit(l) ? 0.6 + (l.weight ?? 0.5) * 1.6 : 0)
-        .linkDirectionalArrowLength((l) => l.frame ? 0 : lit(l) ? 5 : 2.5)
+      const nodeAlpha = (n) => { const base = n.capa || (exists(n) && !n.pending) ? 1 : 0.32; return hl.size && !hl.has(n.id) ? base * 0.15 : base; };
+      fg3.nodeColor((n) => alpha(colorOf(n), nodeAlpha(n)))
+        .linkColor((l) => l.frame ? alpha(C.sphere, hl.size ? 0.35 : 0.9) : lit(l) ? C.accent : alpha(C.axis, hl.size ? 0.08 : cross(l) ? 0.3 : l.status === "planned" ? 0.35 : 0.7))
+        .linkWidth((l) => l.axis ? 1.2 : l.frame ? 2.6 : lit(l) ? (cross(l) ? 0.4 : 0.6 + (l.weight ?? 0.5) * 1.6) : 0)
+        .linkDirectionalArrowLength((l) => l.frame || cross(l) ? 0 : lit(l) ? 5 : 2.5)
         .linkDirectionalArrowColor((l) => lit(l) ? C.accent : alpha(C.axis, hl.size ? 0.08 : 0.7))
         .linkDirectionalParticles((l) => lit(l) ? 2 : 0).linkDirectionalParticleColor(() => C.accent)
         .nodeVisibility(visible).linkVisibility(lvis);
+      d3.nodes.forEach((n) => {  // the layer meshes are ours: the engine does not recolour them
+        const o = n.__threeObj; if (!o || !o.__layer) return;
+        const a = nodeAlpha(n); o.material.color.set(colorOf(n)); o.material.opacity = a; o.material.transparent = a < 1;
+      });
+    }
+    // Layer meshes (subjects, actions). The bundle does not expose three.js, so its classes are taken from a default
+    // node mesh once one exists; until then (and in a graph without layers) every node is the engine's sphere.
+    let T3 = null, tickHook = false;  // T3: null = not yet, false = failed (layers stay spheres), else the classes
+    function layerObject(n) {
+      if (!n.capa || !T3) return null;
+      try {
+        const mat = new T3.Mat({ color: colorOf(n), transparent: true, opacity: 1, wireframe: n.capa === "sujeto" });
+        let geo;
+        if (n.capa === "sujeto") geo = new T3.Sphere(n.r * 1.3, 8, 6);
+        else {
+          const s = n.r * 1.6, v = [[s, 0, 0], [-s, 0, 0], [0, s, 0], [0, -s, 0], [0, 0, s], [0, 0, -s]];
+          const f = [[0, 2, 4], [2, 1, 4], [1, 3, 4], [3, 0, 4], [2, 0, 5], [1, 2, 5], [3, 1, 5], [0, 3, 5]];
+          geo = new T3.Geo(); geo.setAttribute("position", new T3.Attr(new Float32Array(f.flat().flatMap((i) => v[i])), 3)); geo.computeVertexNormals();
+        }
+        const o = new T3.Mesh(geo, mat); o.__layer = true;
+        return o;
+      } catch (e) { return null; }  // any surprise in the bundle's classes: the engine's sphere
+    }
+    function harvest3() {  // once: the three.js classes behind the default sphere, then the layers get their meshes
+      if (T3 !== null || !fg3) return;
+      try {
+        const o = (d3.nodes.find((n) => n.__threeObj && n.__threeObj.geometry && !n.__threeObj.__layer) || {}).__threeObj;
+        if (!o) return;  // no default mesh yet: try on the next tick
+        const g = o.geometry, attr = g.attributes && g.attributes.position && g.attributes.position.constructor;
+        const t = { Mesh: o.constructor, Mat: o.material && o.material.constructor, Sphere: g.constructor, Geo: Object.getPrototypeOf(g.constructor), Attr: attr };
+        if (!Object.values(t).every((f) => typeof f === "function")) { T3 = false; return; }
+        T3 = t;
+        fg3.nodeThreeObject(layerObject);
+        paint3();
+      } catch (e) { T3 = false; }  // stop retrying; the layers stay spheres
     }
     // Labels in 3D: projected each frame onto a 2D overlay (lit nodes, the selection, the hubs).
     // One loop at most (every dim(3) call used to start another one), and only while 3D is on screen.
@@ -327,7 +383,7 @@
         const main = isMain(n);
         if (!main && ++extra > 14) break;
         const txt = labelOf(n);
-        ctx.font = `${n.id === sel || n.id === hover ? 600 : 500} ${main ? 12.5 : 11}px -apple-system, system-ui, sans-serif`;
+        ctx.font = `${n.id === sel || n.id === hover ? 600 : 500} ${main ? 12.5 : 11}px ${FONT}`;
         const tw = ctx.measureText(txt).width, box = [p.x - tw / 2 - 3, p.y + 8, p.x + tw / 2 + 3, p.y + 24];
         if (!main && placed.some((b) => box[0] < b[2] && box[2] > b[0] && box[1] < b[3] && box[3] > b[1])) continue;
         placed.push(box);
@@ -393,7 +449,7 @@
     markDim();
 
     // ---- size, visibility on screen, full screen ----
-    function height() { return isFull() ? window.innerHeight : Math.max(380, Math.min(window.innerHeight * 0.72, 720)); }
+    function height() { return isFull() ? window.innerHeight : opts.height ? opts.height() : Math.max(380, Math.min(window.innerHeight * 0.72, 720)); }
     function resize() {
       const w = wrap.clientWidth || 800, h = height();
       fg2.width(w).height(h); if (fg3) fg3.width(w).height(h);
@@ -476,15 +532,26 @@
     }
 
     // ---- selection and card ----
+    let lastClick = null, lastT = 0;
+    function click(id) {  // the engines have no double click: two clicks on one node within 300 ms (only with onOpen)
+      if (opts.onOpen) {
+        const now = Date.now();
+        if (lastClick === id && now - lastT < 300) { lastClick = null; opts.onOpen(id); return; }
+        lastClick = id; lastT = now;
+      }
+      select(id, false);
+    }
     function select(id, flyTo) {
       const n = meta[id]; if (!n) return false;
       if (n.face && hidden.has(n.face)) { hidden.delete(n.face); renderLegend(); applyVisibility(); }
       route = []; sel = id; lightUp(id); renderCard(n);
       if (flyTo !== false) fly(id);
+      if (opts.onSelect) opts.onSelect(id);
       return true;
     }
     function clear() { sel = null; route = []; lightUp(hover); card.hidden = true; }
     function renderCard(n) {
+      if (opts.card === false) return;
       const rel = (dir) => (nbr[n.id] || []).filter(([, e]) => (dir === "in" ? e.to === n.id : e.from === n.id))
         .sort((a, b) => (b[1].weight ?? 0.5) - (a[1].weight ?? 0.5))
         .map(([o, e]) => el("li", {}, el("button", { type: "button", class: "net-link", onclick: () => select(o) }, meta[o].label),
@@ -503,6 +570,7 @@
 
     // ---- legend: faces as filters ----
     function renderLegend() {
+      if (opts.legend === false) return;
       const chips = Object.entries(faces).map(([f, info]) => el("button", { type: "button", class: "net-chip", "aria-pressed": String(!hidden.has(f)),
         title: hidden.has(f) ? "Mostrar " + info.name : "Ocultar " + info.name,
         onclick: () => toggleFace(f) },
@@ -530,6 +598,8 @@
       const c = copy(d3); d3 = c.data; by3 = c.by; fitted3 = c.kept && !figChanged;
       pinFigure(d3.nodes);
       fg3.graphData(d3); paint3();
+      // the layer meshes: only a graph with subject/action nodes pays for the per-tick check
+      if (!tickHook && T3 === null && d3.nodes.some((n) => n.capa)) { tickHook = true; fg3.onEngineTick(() => { if (T3 === null) harvest3(); }); }
     }
     function setData(g) {
       meta = Object.fromEntries(g.nodes.map((n) => [n.id, Object.assign({}, n)]));
