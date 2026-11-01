@@ -556,6 +556,33 @@
    "pending": false
   },
   {
+   "id": "p_ddd",
+   "label": "D+D+D",
+   "kind": "project",
+   "status": "exists",
+   "face": "delfina",
+   "detail": "Arte para la diversidad: talleres de pintura y otras artes para niños y adultos de todo tipo, sobre todo en Majadahonda.",
+   "pending": false
+  },
+  {
+   "id": "p_ddd_pintura",
+   "label": "Talleres de pintura",
+   "kind": "product",
+   "status": "exists",
+   "face": "delfina",
+   "detail": "Talleres de pintura inclusivos para niños y adultos de todo tipo, normalmente en Majadahonda.",
+   "pending": false
+  },
+  {
+   "id": "p_ddd_artes",
+   "label": "Otras actividades artísticas",
+   "kind": "product",
+   "status": "exists",
+   "face": "delfina",
+   "detail": "Otras actividades artísticas inclusivas para niños y adultos, junto a los talleres de pintura.",
+   "pending": false
+  },
+  {
    "id": "u_ce",
    "label": "Comisión Europea",
    "kind": "funder",
@@ -1542,6 +1569,55 @@
    "from": "e_ddd",
    "to": "e_fund",
    "label": "asociación existente que puede preparar la fundación",
+   "weight": 0.3,
+   "status": "planned"
+  },
+  {
+   "from": "e_ddd",
+   "to": "p_ddd",
+   "label": "titular",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "p_ddd",
+   "to": "p_ddd_pintura",
+   "label": "organiza",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "p_ddd",
+   "to": "p_ddd_artes",
+   "label": "organiza",
+   "weight": 0.9,
+   "status": "exists"
+  },
+  {
+   "from": "s_arte",
+   "to": "p_ddd",
+   "label": "arte inclusivo",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "s_sociedad",
+   "to": "p_ddd",
+   "label": "niños y adultos de todo tipo",
+   "weight": 0.6,
+   "status": "exists"
+  },
+  {
+   "from": "p_ddd_pintura",
+   "to": "p_sessions",
+   "label": "talleres de pintura en las sesiones familiares",
+   "weight": 0.3,
+   "status": "planned"
+  },
+  {
+   "from": "p_ddd_artes",
+   "to": "p_ciclo",
+   "label": "arte en el ciclo arte-ciencia",
    "weight": 0.3,
    "status": "planned"
   },
