@@ -33,6 +33,12 @@
  * "accion" as a small grey rhombus (token --grey, else --muted), in 2D and 3D (3D: a wire sphere and an
  * octahedron). An edge with a capa other than "causa" (rol, hace, sobre...) is drawn thin and dotted, without
  * arrow (3D: a faint line) and pulls weakly. They are part of "our graph", so the diamond wraps them too.
+ * Nested children, by data: a node with parent (a call under its funder) is folded by default: hidden until its
+ * parent is selected (click, search, focus); then the children show on a small ring around the parent, pinned like
+ * the funders around their sphere, exerting no force on our graph; selecting anything else folds them again. The
+ * parent's label reads « · N» (its number of children). Selecting a child, or a route that ends on it, unfolds its
+ * parent and lights it. An edge flagged nest (parent -> child) is drawn thin, without arrow. With no node carrying
+ * parent nothing of this applies.
  * Host filters: call setData() again with the filtered nodes and edges; positions are kept by id.
  *
  * Interaction: drag nodes, wheel/pinch zoom, drag the background to pan (2D) or orbit (3D). Hover lights a node
@@ -46,7 +52,7 @@
 (function () {
   "use strict";
   const KIND_ES = { entity: "figura legal", project: "proyecto", resource: "recurso", product: "producto", partner: "socio", factor: "factor de contexto",
-    resource: "recurso", call: "convocatoria", sphere: "esfera del mundo", funder: "financiador" };
+    resource: "recurso", call: "convocatoria", sphere: "esfera del mundo", funder: "financiador", grant: "ayuda concedida" };
   const STATUS_ES = { exists: "existe", planned: "por crear", proposed: "propuesta", external: "socio externo", factor: "factor" };
   const FACE_VAR = { cloudy: "--line-cloudy", semf: "--line-semf", causality: "--line-causality", branchout: "--line-branchout", delfina: "--line-delfina", cosmo: "--line-cosmo", dako: "--line-dako" };
   const LIB3D = "vendor/3d-force-graph.min.js";
@@ -110,13 +116,16 @@
     let G = { nodes: [], edges: [] }, meta = {}, nbr = {}, hidden = new Set(), hover = null, sel = null, hl = new Set(), hlLinks = new Set(), route = [];
     let FIG = null;  // the world figure of the current graph, or null (graph without the diamond)
     const isWorld = (n) => n.kind === "sphere" || n.kind === "funder";
-    const cross = (l) => !!l.capa && l.capa !== "causa";  // a non-causal layer edge (rol, hace, sobre...)
+    const cross = (l) => (!!l.capa && l.capa !== "causa") || !!l.nest;  // a non-causal layer edge (rol, hace, sobre...) or a nest
+    let kids = {}, open = null;  // nested children by parent id; the parent whose children are unfolded (or null)
+    const child = (n) => !!(n && n.parent && kids[n.parent]);  // a nested node: no force, placed on its parent's ring
+    const free = (n) => (FIG && isWorld(n)) || child(n);  // nodes that neither push nor pull our graph
     // 2D shows the 3D axes in isometric view: the three orthogonal axes at 120°, each pair of spheres opposite
     // through the centre (y up in 3D, down on the canvas).
     const iso = (v) => [(v[0] - v[2]) * Math.sqrt(3) / 2, -v[1] + (v[0] + v[2]) / 2];
     let dim = 2, fg2 = null, fg3 = null, d2 = { nodes: [], links: [] }, d3 = { nodes: [], links: [] }, by2 = {}, by3 = {};
     const exists = (n) => !(n.status === "planned" || n.status === "proposed");
-    const visible = (n) => !(n && n.face && hidden.has(n.face));
+    const visible = (n) => !(n && n.face && hidden.has(n.face)) && !(child(n) && open !== n.parent);
     const lvis = (l) => visible(l.source) && visible(l.target);
     const active = () => (dim === 3 ? fg3 : fg2);
     const node = (id) => (dim === 3 ? by3 : by2)[id];
@@ -131,6 +140,10 @@
       for (let i = 0; i + 1 < route.length; i++) {
         const hit = (nbr[route[i]] || []).find(([o]) => o === route[i + 1]); if (hit) hlLinks.add(key(hit[1]));
       }
+      route.forEach((id) => {  // a nested node on the route: its parent is lit too (the hop to it has no drawn edge)
+        const p = meta[id] && child(meta[id]) ? meta[id].parent : null;
+        if (p && meta[p]) { hl.add(p); hlW[p] = 1; hlLinks.add(p + ">" + id); }
+      });
       paint3();
     }
     // Label text: the node under the pointer, the selection and the spheres read in full; the rest are cut short.
@@ -141,7 +154,7 @@
       const cut = s.slice(0, max), sp = cut.lastIndexOf(" ");
       return (sp > max * 0.5 ? cut.slice(0, sp) : cut).replace(/[\s,·—–:-]+$/, "") + "…";
     }
-    const labelOf = (n) => (isMain(n) ? n.label : shortLabel(n.label, hl.size ? 22 : 30));
+    const labelOf = (n) => (isMain(n) ? n.label : shortLabel(n.label, hl.size ? 22 : 30)) + (n.nkids ? ` · ${n.nkids}` : "");
     const radius = (n) => n.capa === "accion" ? 2.4 + Math.sqrt(n.deg || 0) * 0.5 : n.capa === "sujeto" ? 4 + Math.sqrt(n.deg || 0) * 0.8
       : (n.kind === "sphere" ? 10 : n.kind === "resource" ? 2 : 2.6) + Math.sqrt(n.deg || 0) * 1.25;
 
@@ -196,10 +209,10 @@
     function forces(fg, d) {
       // World nodes (spheres, funders) neither push nor pull ours: our graph lays out as it does without the world,
       // and the figure is placed around it.
-      const free = (l) => !(l.frame || (FIG && (isWorld(l.source) || isWorld(l.target))));
-      fg.d3Force("charge").strength((n) => FIG && isWorld(n) ? 0 : -40 - n.r * 14).distanceMax(420);
+      const pulls = (l) => !(l.frame || free(l.source) || free(l.target));
+      fg.d3Force("charge").strength((n) => free(n) ? 0 : -40 - n.r * 14).distanceMax(420);
       fg.d3Force("link").distance((l) => 26 + (1 - (l.weight ?? 0.5)) * 46 + (l.source.r || 5) + (l.target.r || 5))
-        .strength((l) => !free(l) ? 0 : cross(l) ? 0.12 : 0.15 + (l.weight ?? 0.5) * 0.5);
+        .strength((l) => !pulls(l) ? 0 : cross(l) ? 0.12 : 0.15 + (l.weight ?? 0.5) * 0.5);
       fg.d3Force("collide", collide());
       // The engine's own centring averages ALL nodes, the octahedron included, which then follows that centre: a
       // feedback loop that drifts the graph away. Our centring uses only our graph; the figure is placed around it.
@@ -210,7 +223,7 @@
       // The octahedron around our graph: centred on it, regular (all 12 edges equal), just big enough for the
       // inscribed sphere (3D) or the hexagon's inner circle (2D) to wrap it. Funders sit between the graph and
       // their strongest sphere, on a small ring. Recomputed each tick, smoothed, so it follows the layout.
-      let nodes = [], inner = [], spheres = [], groups = {}, Rs = 0, axes = [], normals = [];
+      let nodes = [], inner = [], spheres = [], groups = {}, Rs = 0, axes = [], normals = [], nested = {}, byId = {};
       const ring = {};
       const force = () => {
         if (!inner.length) return;
@@ -219,7 +232,7 @@
         cx /= inner.length; cy /= inner.length; cz /= inner.length;
         inner.forEach((n) => { n.x -= cx; n.y -= cy; if (d === 3) n.z = (n.z || 0) - cz; });  // centre our graph on 0
         cx = cy = cz = 0;
-        if (!FIG) return;
+        if (!FIG) return nest();
         // The smallest regular figure that holds every node, plus a margin. 3D: a point p is inside the octahedron of
         // vertex distance R when |p·a1| + |p·a2| + |p·a3| <= R (a_i its three axes). 2D: inside the isometric
         // hexagon (vertices at R, apothem R·cos 30°) when p·u <= R·cos 30° for its six side normals u.
@@ -243,10 +256,34 @@
               c[2] + (o[0][2] * Math.cos(a) + o[1][2] * Math.sin(a)) * r] : [c[0] + Math.cos(a) * r, c[1] + Math.sin(a) * r, 0]);
           });
         });
+        nest();
+      };
+      // Nested children on a small ring around their parent, after the parent has been placed. In 3D the ring is
+      // perpendicular to the parent's direction from the centre, so it faces the camera that flies to the parent.
+      const nest = () => {
+        Object.entries(nested).forEach(([pid, cs]) => {
+          const p = byId[pid]; if (!p || p.x === undefined) return;
+          const r = (p.r || 4) + 10 + cs.length * 2.6, pz = p.z || 0;
+          let o = null;
+          if (d === 3) {
+            const l = Math.hypot(p.x, p.y, pz), c = l > 1 ? [p.x / l, p.y / l, pz / l] : [0, 0, 1];
+            const cr = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+            const un = (a) => { const m = Math.hypot(...a) || 1; return a.map((x) => x / m); };
+            const u = un(cr(c, Math.abs(c[1]) < 0.9 ? [0, 1, 0] : [1, 0, 0])); o = [u, cr(c, u)];
+          }
+          cs.forEach((n, i) => {
+            // from the top; an even count is turned half a step so that no child sits on the parent's label below it
+            const a = (2 * Math.PI * i) / cs.length - Math.PI / 2 + (cs.length % 2 ? 0 : Math.PI / cs.length), ca = Math.cos(a) * r, sa = Math.sin(a) * r;
+            n.x = n.fx = p.x + (o ? o[0][0] * ca + o[1][0] * sa : ca); n.y = n.fy = p.y + (o ? o[0][1] * ca + o[1][1] * sa : sa); n.vx = n.vy = 0;
+            if (d === 3) { n.z = n.fz = pz + o[0][2] * ca + o[1][2] * sa; n.vz = 0; }
+          });
+        });
       };
       force.initialize = (ns) => {
         nodes = ns; Rs = 0;
-        inner = ns.filter((n) => !(FIG && isWorld(n)));
+        inner = ns.filter((n) => !free(n));
+        byId = Object.fromEntries(ns.map((n) => [n.id, n])); nested = {};
+        ns.filter(child).forEach((n) => { (nested[n.parent] = nested[n.parent] || []).push(n); });
         if (FIG) {
           axes = (FIG.top || []).map((id) => FIG.vertices[id]);
           const P = Object.values(FIG.vertices).map((v) => { const q = iso(v); return Math.atan2(q[1], q[0]); }).sort((a, b) => a - b);
@@ -275,7 +312,7 @@
       const force = (a) => {
         for (let i = 0; i < nodes.length; i++) for (let j = i + 1; j < nodes.length; j++) {
           const p = nodes[i], q = nodes[j], dx = q.x - p.x, dy = q.y - p.y, dz = (q.z || 0) - (p.z || 0);
-          if (FIG && (isWorld(p) || isWorld(q))) continue;
+          if (free(p) || free(q)) continue;
           const d = Math.hypot(dx, dy, dz) || 1, min = p.r + q.r + 6;
           if (d < min) { const m = ((min - d) / d) * a * 0.5; p.vx -= dx * m; p.vy -= dy * m; q.vx += dx * m; q.vy += dy * m;
             if (p.vz !== undefined) { p.vz -= dz * m; q.vz += dz * m; } }
@@ -394,7 +431,7 @@
     function pinFigure(nodes) {  // spheres and funders are placed by the figure force (not draggable away)
       nodes.forEach((n) => {
         if (n.pin) { n.fx = n.fy = n.fz = undefined; }
-        n.pin = !!(FIG && isWorld(n));
+        n.pin = !!free(n);
       });
     }
 
@@ -511,7 +548,7 @@
       ids = (ids || []).filter((i) => meta[i]); if (!ids.length) return false;
       ids.forEach((i) => { const f = meta[i].face; if (f) hidden.delete(f); });
       renderLegend(); applyVisibility();
-      route = ids; sel = ids[ids.length - 1]; lightRoute(); renderCard(meta[sel]);
+      route = ids; sel = ids[ids.length - 1]; unfold(sel); lightRoute(); renderCard(meta[sel]);
       frame(ids);
       return true;
     }
@@ -544,12 +581,18 @@
     function select(id, flyTo) {
       const n = meta[id]; if (!n) return false;
       if (n.face && hidden.has(n.face)) { hidden.delete(n.face); renderLegend(); applyVisibility(); }
-      route = []; sel = id; lightUp(id); renderCard(n);
+      route = []; sel = id; unfold(id); lightUp(id); renderCard(n);
       if (flyTo !== false) fly(id);
       if (opts.onSelect) opts.onSelect(id);
       return true;
     }
-    function clear() { sel = null; route = []; lightUp(hover); card.hidden = true; }
+    function clear() { sel = null; route = []; unfold(null); lightUp(hover); card.hidden = true; }
+    // The parent unfolded by a selection: the node itself when it has children, its parent when it is a child.
+    function unfold(id) {
+      const n = id && meta[id], want = !n ? null : kids[id] ? id : child(n) ? n.parent : null;
+      if (want === open) return;
+      open = want; applyVisibility();
+    }
     function renderCard(n) {
       if (opts.card === false) return;
       const rel = (dir) => (nbr[n.id] || []).filter(([, e]) => (dir === "in" ? e.to === n.id : e.from === n.id))
@@ -607,6 +650,10 @@
       const deg = {};
       edges.forEach((e) => { deg[e.from] = (deg[e.from] || 0) + 1; deg[e.to] = (deg[e.to] || 0) + 1; });
       Object.values(meta).forEach((n) => { n.deg = deg[n.id] || 0; n.r = radius(n); });
+      kids = {};
+      Object.values(meta).forEach((n) => { if (n.parent && meta[n.parent]) (kids[n.parent] = kids[n.parent] || []).push(n.id); });
+      Object.entries(kids).forEach(([p, cs]) => { meta[p].nkids = cs.length; });
+      if (open && !kids[open]) open = null;
       G = { nodes: Object.values(meta), edges };
       const hadFig = !!FIG;
       FIG = g.figure && Object.keys(g.figure.vertices).every((i) => meta[i]) ? g.figure : null;
